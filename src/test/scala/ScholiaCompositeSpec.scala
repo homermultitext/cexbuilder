@@ -47,14 +47,10 @@ class ScholiaCompositeSpec extends FlatSpec {
     )
     val actualOutput = filesInDir(outDir, "xml")
     assert(actualOutput == expectedOutput)
+    
+    //tidy up:
     for (f <- actualOutput.toSeq) {
       f.delete()
     }
-    //clean up:
-    /*
-    if (fileTemp.exists) {
-       fileTemp.delete()
-    }
-*/
   }
 }
