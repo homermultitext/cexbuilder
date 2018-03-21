@@ -1,36 +1,23 @@
 name := "CEX builder"
 
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.4")
-scalaVersion := (crossScalaVersions in ThisBuild).value.last
+
+scalaVersion := "2.12.4"
 
 
-lazy val root = project.in(file(".")).
-    aggregate(crossedJVM, crossedJS).
-    settings(
-      publish := {},
-      publishLocal := {}
+name := "cexbuilder"
+organization := "org.homermultitext"
+version := "0.0.1"
+licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
 
-    )
+  "edu.holycross.shot.cite" %% "xcite" % "3.2.2",
+  "edu.holycross.shot" %% "ohco2" % "10.5.3",
+  "org.homermultitext" %% "hmt-textmodel" % "2.2.0"
+)
 
-lazy val crossed = crossProject.in(file(".")).
-    settings(
-      name := "cexbuilder",
-      organization := "org.homermultitext",
-      version := "0.0.1",
-      licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
-      libraryDependencies ++= Seq(
-        "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
-        "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
-      )
-    ).
-    jvmSettings(
-      tutTargetDirectory := file("docs"),
-      tutSourceDirectory := file("shared/src/main/tut")
-    ).
-    jsSettings(
-      skip in packageJSDependencies := false,
-      scalaJSUseMainModuleInitializer in Compile := true
-    )
+tutTargetDirectory := file("docs")
+tutSourceDirectory := file("shared/src/main/tut")
 
-lazy val crossedJVM = crossed.jvm.enablePlugins(TutPlugin)
-lazy val crossedJS = crossed.js
+
+enablePlugins(TutPlugin)
