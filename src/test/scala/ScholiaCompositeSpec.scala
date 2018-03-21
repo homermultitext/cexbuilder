@@ -34,19 +34,27 @@ class ScholiaCompositeSpec extends FlatSpec {
 
   it should "write full-blown CEX serialization of scholia content"  in {
     val srcDir = "src/test/resources/scholia-xml"
-    val outDir = "src/test/resources/scholia-cex"
+    val outDir = "src/test/resources/scholia-composites"
     ScholiaComposite.composite(srcDir, outDir)
     val expectedOutput = Set(
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msA.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAext.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAextra.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAil.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAim.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAint.xml"),
-      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAlater.xml")
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msA.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAext.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAextra.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAil.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAim.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAint.xml"),
+      new File ("src/test/resources/scholia-composites/va_composite_scholia_msAlater.xml")
     )
     val actualOutput = filesInDir(outDir, "xml")
     assert(actualOutput == expectedOutput)
-
+    for (f <- actualOutput.toSeq) {
+      f.delete()
+    }
+    //clean up:
+    /*
+    if (fileTemp.exists) {
+       fileTemp.delete()
+    }
+*/
   }
 }
