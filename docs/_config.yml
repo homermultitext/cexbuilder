@@ -1,0 +1,23 @@
+
+
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            CEX builder
+tagline:          'Serialize HMT archive to CEX'
+description:      ''
+
+
+baseurl: '/hmt-cexbuilder/'
+
+
+author:
+  name:           'Neel Smith'
+
+
+links:
+  - title:  Github repository for CEX builder
+    url:  https://github.com/homermultitext/hmt-cexbuilder
+    external: true
