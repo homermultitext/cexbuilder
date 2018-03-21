@@ -16,7 +16,7 @@ class ScholiaCompositeSpec extends FlatSpec {
   it should "extract text content for a given single document" in {
     val doc = "msAextra"
     val srcDir = "src/test/resources/scholia-xml"
-    val xmlFiles = filesInDir(srcDir, "xml")
+    val xmlFiles = FileCollector.filesInDir(srcDir, "xml")
     val msAextraText = ScholiaComposite.compositeDocument(doc, xmlFiles)
     // this results in XML organized by book.  Put a wrapper element around it
     // to form valid XML.
@@ -45,7 +45,7 @@ class ScholiaCompositeSpec extends FlatSpec {
       new File ("src/test/resources/scholia-composites/va_composite_scholia_msAint.xml"),
       new File ("src/test/resources/scholia-composites/va_composite_scholia_msAlater.xml")
     )
-    val actualOutput = filesInDir(outDir, "xml")
+    val actualOutput = FileCollector.filesInDir(outDir, "xml")
     assert(actualOutput == expectedOutput)
 
     //tidy up:

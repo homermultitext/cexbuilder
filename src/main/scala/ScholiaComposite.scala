@@ -21,7 +21,7 @@ object ScholiaComposite {
   * @param srcDir Directory containing XML editions of scholia.
   */
   def scholiaSet(srcDir: String): Set[String]  = {
-    val xmlSource = filesInDir(srcDir, "xml")
+    val xmlSource = FileCollector.filesInDir(srcDir, "xml")
     val allGroups = for (f <- xmlSource) yield {
       val root = XML.loadFile(f)
       val groups = root \ "text" \ "group" \ "text"
@@ -74,7 +74,7 @@ object ScholiaComposite {
     val cexDir = new File(outputDir)
 
     val scholiaGroups = scholiaSet(inputDir)
-    val xmlFiles = filesInDir(inputDir, "xml")
+    val xmlFiles = FileCollector.filesInDir(inputDir, "xml")
     for (s <- scholiaGroups) {
       val content = compositeDocument(s, xmlFiles)
       val outputFile = new File(cexDir, s"${fileNameBase}_${s}.xml")
