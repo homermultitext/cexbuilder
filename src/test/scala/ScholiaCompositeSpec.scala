@@ -13,15 +13,15 @@ class ScholiaCompositeSpec extends FlatSpec {
     assert(ScholiaComposite.scholiaSet(scholiaSrc) == expected)
   }
 
-
-
   it should "extract text content for a given single document" in {
     val doc = "msAextra"
     val srcDir = "src/test/resources/scholia-xml"
     val xmlFiles = filesInDir(srcDir, "xml")
     val msAextraText = ScholiaComposite.compositeDocument(doc, xmlFiles)
-    // should produce two scholia in book 1 and one in book 2:
+    // this results in XML organized by book.  Put a wrapper element around it
+    // to form valid XML.
     val root = XML.loadString("<root>" + msAextraText + "</root>")
+    // should produce two scholia in book 1 and one in book 2.
     val books = root \ "div"
     assert(books.size == 2)
     val book1 = books(0)
@@ -29,5 +29,24 @@ class ScholiaCompositeSpec extends FlatSpec {
     assert (scholia1.size == 2)
     val scholia2 = books(1)
     assert (scholia2.size == 1)
+  }
+
+
+  it should "write full-blown CEX serialization of scholia content"  in {
+    val srcDir = "src/test/resources/scholia-xml"
+    val outDir = "src/test/resources/scholia-cex"
+    ScholiaComposite.composite(srcDir, outDir)
+    val expectedOutput = Set(
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msA.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAext.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAextra.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAil.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAim.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAint.xml"),
+      new File ("src/test/resources/scholia-cex/va_composite_scholia_msAlater.xml")
+    )
+    val actualOutput = filesInDir(outDir, "xml")
+    assert(actualOutput == expectedOutput)
+
   }
 }

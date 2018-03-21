@@ -50,7 +50,7 @@ object ScholiaComposite {
       if (relevant.size > 0) {
         val doc = relevant(0)
         val scholia = doc \ "body" \ "div"
-        println("\tIn " + document + "book " + book  +", " + scholia.size + " scholia.")
+        println("\tIn " + document + ", book " + book  +": " + scholia.size + " scholia.")
         val scholStrings = scholia.map(_.toString)
         bookOpen + scholStrings.mkString("\n") + "</div>"
       } else { "" }
@@ -58,4 +58,53 @@ object ScholiaComposite {
     lines.mkString("\n")
   }
 
+
+  /** Write composite CEX files for set of XML source files.
+  *
+  * @param inputDir Name of directory with XML source files.
+  * @param outputDir Name of directory where CEX files should be written.
+  * @param fileNameBase Base for individual file names.  Final file name will
+  * be this string + "_" + the scholion identifier + ".xml".
+  */
+  def composite(inputDir: String,
+    outputDir: String,
+    fileNameBase: String = "va_composite_scholia") = {
+    //  ) = {
+
+    val cexDir = new File(outputDir)
+
+    val scholiaGroups = scholiaSet(inputDir)
+    val xmlFiles = filesInDir(inputDir, "xml")
+    for (s <- scholiaGroups) {
+      val content = compositeDocument(s, xmlFiles)
+      val outputFile = new File(cexDir, s"${fileNameBase}_${s}.xml")
+      new PrintWriter(outputFile) {write(docOpen + content + docClose); close}
+    }
+  }
+
+
+
+  /** Closing statement for TEI wrapping elements.*/
+  val docClose = "   </body>\n  </text>\n</TEI>"
+
+
+  /** Opening statement for TEI wrapping elements.*/
+  val docOpen = """<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Composite text of HMT XML edition of scholia</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Unpublished</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Transcribed directly from photograhy of MS source</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text xml:lang="grc">
+     <body>
+"""
 }
