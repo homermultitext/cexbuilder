@@ -1,4 +1,4 @@
-package org.homermultitext.cexbuilder
+package org.homermultitext.hmtcexbuilder
 
 import org.scalatest.FlatSpec
 import java.io.File
@@ -47,7 +47,7 @@ class ScholiaCompositeSpec extends FlatSpec {
     )
     val actualOutput = filesInDir(outDir, "xml")
     assert(actualOutput == expectedOutput)
-    
+
     //tidy up:
     for (f <- actualOutput.toSeq) {
       f.delete()

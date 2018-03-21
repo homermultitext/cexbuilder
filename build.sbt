@@ -1,10 +1,10 @@
-name := "CEX builder"
+name := "HMT CEX builder"
 
 
 scalaVersion := "2.12.4"
 
 
-name := "cexbuilder"
+name := "hmtcexbuilder"
 organization := "org.homermultitext"
 version := "0.0.1"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
@@ -17,7 +17,7 @@ libraryDependencies ++= Seq(
 )
 
 tutTargetDirectory := file("docs")
-tutSourceDirectory := file("shared/src/main/tut")
+tutSourceDirectory := file("src/main/tut")
 
 
 enablePlugins(TutPlugin)

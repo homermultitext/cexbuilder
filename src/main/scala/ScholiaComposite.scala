@@ -1,4 +1,4 @@
-package org.homermultitext.cexbuilder
+package org.homermultitext.hmtcexbuilder
 
 
 import scala.xml._

@@ -1,7 +1,7 @@
 package org.homermultitext
 import java.io.File
 
-package object cexbuilder {
+package object hmtcexbuilder {
 
   def filesInDir(dir: String, extension: String = "xml"): Set[File] = {
     val libraryDir = new File(dir)

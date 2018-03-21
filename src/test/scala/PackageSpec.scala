@@ -1,4 +1,4 @@
-package org.homermultitext.cexbuilder
+package org.homermultitext.hmtcexbuilder
 import org.scalatest.FlatSpec
 import java.io.File
 
