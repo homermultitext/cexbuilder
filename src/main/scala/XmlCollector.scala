@@ -37,4 +37,9 @@ object XmlCollector {
     buff.toString
   }
 
+  def collectText(s: String): String = {
+    val root = XML.loadString(s)
+    collectText(root, "")
+  }
+
 }
