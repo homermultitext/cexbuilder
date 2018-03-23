@@ -1,7 +1,8 @@
 package org.homermultitext.hmtcexbuilder
 import scala.xml._
+import java.io.File
 
-object XmlCollector {
+object DataCollector {
 
 
   /** Recursively collect contents of all text-node
@@ -10,8 +11,8 @@ object XmlCollector {
   * @param buff Buffer for collecting text contents.
   * @return A single String with all text from n.
   */
-  def collectText(n: xml.Node): String = {
-    collectText(n,"")
+  def collectXmlText(n: xml.Node): String = {
+    collectXmlText(n,"")
   }
 
   /** Recursively collect contents of all text-node
@@ -20,7 +21,7 @@ object XmlCollector {
   * @param buff Buffer for collecting text contents.
   * @return A single String with all text from n.
   */
-  def collectText(n: xml.Node, s: String): String = {
+  def collectXmlText(n: xml.Node, s: String): String = {
     var buff = StringBuilder.newBuilder
     buff.append(s)
     n match {
@@ -30,16 +31,23 @@ object XmlCollector {
 
       case e: xml.Elem => {
         for (ch <- e.child) {
-          buff = new StringBuilder(collectText(ch, buff.toString))
+          buff = new StringBuilder(collectXmlText(ch, buff.toString))
         }
       }
     }
     buff.toString
   }
 
-  def collectText(s: String): String = {
+  def collectXmlText(s: String): String = {
     val root = XML.loadString(s)
-    collectText(root, "")
+    collectXmlText(root, "")
+  }
+
+  def filesInDir(dir: String, extension: String = "xml"): Set[File] = {
+    val libraryDir = new File(dir)
+    val fileVector = libraryDir.listFiles.filter(_.isFile).toVector
+    val files = fileVector.filter(_.getName.endsWith(extension))
+    files.toSet
   }
 
 }
