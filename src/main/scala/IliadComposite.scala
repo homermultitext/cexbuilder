@@ -49,7 +49,7 @@ object IliadComposite {
 
     val cexDir = new File(outputDir)
 
-    val xmlFiles = FileCollector.filesInDir(inputDir, "xml")
+    val xmlFiles = DataCollector.filesInDir(inputDir, "xml")
 
     val content = compositeDocument(xmlFiles)
     val outputFile = new File(cexDir, s"${fileNameBase}.xml")

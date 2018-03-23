@@ -13,7 +13,7 @@ class IliadCompositeSpec extends FlatSpec {
 
   "The IliadComposite object" should "extract text content in boks in a single text" in {
 
-    val xmlFiles = FileCollector.filesInDir(srcDir,"xml")
+    val xmlFiles = DataCollector.filesInDir(srcDir,"xml")
 
     val iliadText = IliadComposite.compositeDocument(xmlFiles)
 
@@ -41,7 +41,7 @@ class IliadCompositeSpec extends FlatSpec {
     val expectedOutput = Set(
       new File ("src/test/resources/iliad-composites/va_iliad.xml")
     )
-    val actualOutput = FileCollector.filesInDir(outDir, "xml")
+    val actualOutput = DataCollector.filesInDir(outDir, "xml")
     assert(actualOutput == expectedOutput)
 
     //tidy up:
