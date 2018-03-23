@@ -2,6 +2,7 @@ package org.homermultitext.hmtcexbuilder
 import org.scalatest.FlatSpec
 import scala.xml._
 import java.io.File
+import edu.holycross.shot.cex._
 
 class DataCollectorSpec extends FlatSpec {
 
@@ -30,5 +31,14 @@ class DataCollectorSpec extends FlatSpec {
       new File("src/test/resources/scholia-xml/VenetusA-Scholia-02.xml")
     )
     assert(xmlFiles == expected)
+  }
+
+  it should "collect text content from CEX files" in {
+    val srcDir = "src/test/resources/cex"
+    val cexString = DataCollector.compositeCex(srcDir)
+    val cex = CexParser(cexString)
+
+    val expectedLabels = Set("ctscatalog", "ctsdata", "cexversion", "citelibrary")
+    assert(cex.blockLabels == expectedLabels)
   }
 }
