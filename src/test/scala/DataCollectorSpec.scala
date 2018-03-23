@@ -24,7 +24,7 @@ class DataCollectorSpec extends FlatSpec {
 
   it should "list files in a directory" in  {
     val srcDir = "src/test/resources/scholia-xml"
-    val xmlFiles = FileCollector.filesInDir(srcDir, "xml")
+    val xmlFiles = DataCollector.filesInDir(srcDir, "xml")
     val expected = Set(
       new File("src/test/resources/scholia-xml/VenetusA-Scholia-01.xml"),
       new File("src/test/resources/scholia-xml/VenetusA-Scholia-02.xml")
