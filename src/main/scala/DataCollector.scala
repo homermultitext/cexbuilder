@@ -57,11 +57,15 @@ object DataCollector {
   * @param dir Directory to look in.
   * @param extension File extension to match.
   */
-  def filesInDir(dir: String, extension: String = "xml"): Set[File] = {
+  def filesInDir(dir: String, extension: String): Set[File] = {
     val libraryDir = new File(dir)
-    val fileVector = libraryDir.listFiles.filter(_.isFile).toVector
-    val files = fileVector.filter(_.getName.endsWith(extension))
-    files.toSet
+    if (! libraryDir.exists) {
+      throw new Exception("DataCollector: no directory " + libraryDir + " found.")
+    } else {
+      val fileVector = libraryDir.listFiles.filter(_.isFile).toVector
+      val files = fileVector.filter(_.getName.endsWith(extension))
+      files.toSet
+    }
   }
 
 
@@ -70,8 +74,8 @@ object DataCollector {
   *
   * @param dir Directory to collect content from.
   */
-  def compositeCex(dir: String): String = {
-    def fileSet = filesInDir(dir, "cex")
+  def compositeFiles(dir: String, extension: String = "cex"): String = {
+    def fileSet = filesInDir(dir, extension)
     def txts = for (f <- fileSet) yield {
       val lines = scala.io.Source.fromFile(f).getLines.toVector
       lines.mkString("\n")

@@ -35,7 +35,7 @@ class DataCollectorSpec extends FlatSpec {
 
   it should "collect text content from CEX files" in {
     val srcDir = "src/test/resources/cex"
-    val cexString = DataCollector.compositeCex(srcDir)
+    val cexString = DataCollector.compositeFiles(srcDir, "cex")
     val cex = CexParser(cexString)
 
     val expectedLabels = Set("ctscatalog", "ctsdata", "cexversion", "citelibrary")

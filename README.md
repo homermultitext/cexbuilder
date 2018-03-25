@@ -10,4 +10,11 @@ Serialize contents of HMT archive to CEX format.
 
 See documentation: <https://homermultitext.github.io/hmt-cexbuilder/>.
 
-Binary library published to bintray for Scala 2.12.
+
+## Releases
+
+Current release:  **2.0.0**.
+
+See [release notes](releases).
+
+Binary library for all releases published to bintray for Scala 2.12.
