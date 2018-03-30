@@ -12,7 +12,7 @@ class ReleaseSurveyorSpec extends FlatSpec {
   val releaseId = "test-release"
   val lib = CiteLibrarySource.fromFile(tinyCex)
 
-  "A ReleaseSurveyor" should "set up a set of directories" in {
+  "A ReleaseSurveyor" should "set up a set of directories for reports" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
     val directories =  surveyor.dirMap
 
@@ -28,12 +28,7 @@ class ReleaseSurveyorSpec extends FlatSpec {
         f.delete
       }
       subdir.delete
-
     }
-    // text
-    // img
-    // tbs
-    // dse
   }
 
 
