@@ -29,6 +29,7 @@ class ReleaseSurveyorSpec extends FlatSpec {
       }
       subdir.delete
     }
+    surveyor.releaseDir.delete
   }
 
 
