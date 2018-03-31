@@ -43,7 +43,7 @@ class ReleaseSurveyorSpec extends FlatSpec {
   }
   it should "report on binary image collections" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
-    surveyor.imageOverview( new File(surveyor.releaseDir, "images"))
+    surveyor.imageOverview( new File(surveyor.releaseDir, "images"), 2)
   }
 
 

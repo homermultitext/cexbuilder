@@ -16,9 +16,8 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   val imtIctBase = "http://www.homermultitext.org/ict2/"
   val hmtIipSrvBase = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/"
 
-
   /** Compose IIPSrv URL for an image. */
-  def iipSrvUrl(img: Cite2Urn, baseUrl: String = hmtIipSrvBase, width: Int = 1000): String = {
+  def iipSrvUrl(img: Cite2Urn,  width: Int = 1000, baseUrl: String = hmtIipSrvBase): String = {
     val trail = s"&WID=${width}&CVT=JPEG"
     val imageOnly = List(baseUrl, img.namespace, img.collection, img.version, img.dropExtensions.objectOption.get).mkString("/") + s".tif"
 
@@ -26,9 +25,8 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
       case None => imageOnly +  trail
       case roi:  Some[String] =>imageOnly + "&RGN=" + roi.get + trail
     }
-
   }
-//http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/hmt/vaimg/2017a/VA012RN_0013.tif&RGN=0.1107,0.3552,0.05651,0.04688&wID=5000&CVT=JPEG
+
   /** Map of topic label to subdirectory name. */
   val subdirForTopic = Map (
     "images" -> "images",
@@ -123,26 +121,62 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
   *
   * @param imageDir Directory where image reports should be written.
   */
-  def imageOverview(imageDir: File) = {
+  def imageOverview(imageDir: File, colSize: Int = 5) = {
     val binaryImageModel = Cite2Urn("urn:cite2:cite:datamodels.v1:imagemodel")
     val citeCatalog = lib.collectionRepository.get.catalog
 
     for (urn <- lib.collectionsForModel(binaryImageModel)) {
       val objects = lib.collectionRepository.get.objects ~~ urn
-      println("COLLECTION: ")
-      println("1.  " + citeCatalog.collection(urn).get.collectionLabel)
-      println(s"2. size ${objects.size} images" )
-      println("3.  Visuatiozze")
-      for(k <- objects.objectMap.keySet) {
+      val hdr = "# Summary for image collection\n\n" +
+      s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} images.\n\n"
 
-        println("\t" + k+"->"+objects.objectMap(k).label)
+
+      // format a markdown string for each image
+      val imgSet = for(k <- objects.objectMap.keySet) yield {
+         s"![${k}](${iipSrvUrl(k, 500)}) <br/>${objects.objectMap(k).label}"
       }
+      val imgRecords = imgSet.toSeq.toVector
+      // place the images in a tablewith with specified width (in cells)
+      val rows = for (i <- 0 until imgRecords.size) yield {
+          val oneBasedIndex = i + 1
+          if (oneBasedIndex % colSize == 0){
+            val sliver = imgRecords.slice( oneBasedIndex - colSize, oneBasedIndex)
+            "| " + sliver.mkString(" | ") + " |"
+          } else ""
+      }
+
+      val sizedRows = rows.filter(_.nonEmpty)
+      // catch any left over if rows/columns didn't work out evenly
+      val remndr =  imgRecords.size % colSize
+      val trailer = if (remndr != 0)  {
+        val sliver = imgRecords.slice(imgRecords.size - remndr, imgRecords.size)
+        val pad = List.fill( colSize - remndr - 1)( " | ").mkString
+        "| " + sliver.mkString(" | ") + pad + " |\n"
+      } else ""
+
+
+
+      val tableLabels =  List.fill(colSize)("| ").mkString + "|\n"
+      val tableSeparator =  List.fill(colSize)("|:-------------").mkString + "|\n"
+
+      //println(hdrLabels +  hdrSeparator + rows.mkString("\n") + trailer  +  "\n\n")
+
+      val reportFile = new File(imageDir, urn.collection + "-summary.md")
+      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
     }
 
-    ///lib.collectionRepository.get.catalog.collection(Cite2Urn("urn:cite2:hmt:vaimg.2017a:")).get.collectionLabel
-/*    val dm = for (dm <- lib.dataModels.get)  yield {
-      "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   " + lib.collectionsForModel(dm.model).mkString("\n-   ")
-    }
+/*
+
+
+// Collect any left-over cells
+val remndr =  imgContent.size % colSize
+val trailer = if (remndr != 0)  {
+  val sliver = imgContent.slice(imgContent.size - remndr, imgContent.size)
+  val pad = List.fill( colSize - remndr - 1)( " | ").mkString
+  "| " + sliver.mkString(" | ") + pad + " |\n"
+} else ""
+
+
 */
   }
 
