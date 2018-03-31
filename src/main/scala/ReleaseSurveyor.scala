@@ -1,5 +1,6 @@
 package org.homermultitext.hmtcexbuilder
 import edu.holycross.shot.scm._
+import edu.holycross.shot.cite._
 import java.io.File
 import java.io.PrintWriter
 
@@ -12,8 +13,22 @@ import java.io.PrintWriter
 * of subdirectory where reports are written.
 */
 case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String) {
+  val imtIctBase = "http://www.homermultitext.org/ict2/"
+  val hmtIipSrvBase = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/"
 
 
+  /** Compose IIPSrv URL for an image. */
+  def iipSrvUrl(img: Cite2Urn, baseUrl: String = hmtIipSrvBase, width: Int = 1000): String = {
+    val trail = s"&WID=${width}&CVT=JPEG"
+    val imageOnly = List(baseUrl, img.namespace, img.collection, img.version, img.dropExtensions.objectOption.get).mkString("/") + s".tif"
+
+    img.objectExtensionOption match {
+      case None => imageOnly +  trail
+      case roi:  Some[String] =>imageOnly + "&RGN=" + roi.get + trail
+    }
+
+  }
+//http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/hmt/vaimg/2017a/VA012RN_0013.tif&RGN=0.1107,0.3552,0.05651,0.04688&wID=5000&CVT=JPEG
   /** Map of topic label to subdirectory name. */
   val subdirForTopic = Map (
     "images" -> "images",
@@ -39,7 +54,6 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     fileLayoutBoilerPlate  +
     "## Collection data models\n\n"
 
-
     val dm = for (dm <- lib.dataModels.get)  yield {
       "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   " + lib.collectionsForModel(dm.model).mkString("\n-   ")
     }
@@ -54,11 +68,6 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
       //s"-   ${txt.label} (${txt.urn})"
     }
     hdr + dm.mkString("\n") + txtsHdr+ exemplarList.mkString("\n") + versionList.mkString("\n")
-
-      /*()
-          val home = new File(releaseDir, "index.md")
-          new PrintWriter(home){ write(homePage); close;} */
-
   }
 
   /** Find root directory as a File object,
@@ -86,7 +95,6 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   /** Construct map of required subdirectories.
   */
   def dirMap: Map[String, File] = {
-
     val subdirMap = for (topic <- subdirForTopic.keySet) yield {
         val subdir = new File(releaseDir, subdirForTopic(topic))
         subdir.mkdir
@@ -94,7 +102,6 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
         (topic, subdir)
     }
     subdirMap.toMap
-    //Map( "texts" -> textDir, "images" -> imageDir, "tbs" -> tbsDir, "dse" -> dseDir)
   }
 
 
@@ -112,14 +119,42 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
     */
   }
 
-  // overview of images modelled as binaryimg objects
-  def imageOverview(imageDir: File) = {}
+  /** Compose report on collections of images modelled as imagemodel objects.
+  *
+  * @param imageDir Directory where image reports should be written.
+  */
+  def imageOverview(imageDir: File) = {
+    val binaryImageModel = Cite2Urn("urn:cite2:cite:datamodels.v1:imagemodel")
+    val citeCatalog = lib.collectionRepository.get.catalog
+
+    for (urn <- lib.collectionsForModel(binaryImageModel)) {
+      val objects = lib.collectionRepository.get.objects ~~ urn
+      println("COLLECTION: ")
+      println("1.  " + citeCatalog.collection(urn).get.collectionLabel)
+      println(s"2. size ${objects.size} images" )
+      println("3.  Visuatiozze")
+      for(k <- objects.objectMap.keySet) {
+
+        println("\t" + k+"->"+objects.objectMap(k).label)
+      }
+    }
+
+    ///lib.collectionRepository.get.catalog.collection(Cite2Urn("urn:cite2:hmt:vaimg.2017a:")).get.collectionLabel
+/*    val dm = for (dm <- lib.dataModels.get)  yield {
+      "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   " + lib.collectionsForModel(dm.model).mkString("\n-   ")
+    }
+*/
+  }
 
   //  overview of text-bearing surfaces
-  def tbsOverview(tbsDir: File) = {}
+  def tbsOverview(tbsDir: File) = {
+    def tbsModel = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
+  }
 
   // overview of DSE triangle
-  def dseOverview(dseDir: File)= {}
+  def dseOverview(dseDir: File)= {
+    val dseModel = Cite2Urn("urn:cite2:cite:datamodels.v1:dse")
+  }
 
 
 

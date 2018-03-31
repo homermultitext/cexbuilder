@@ -3,7 +3,7 @@ layout: page
 title: CEX builder
 ---
 
-Convert HMT archive to CEX for publication.
+Utilities to convert material in the HMT archive to CEX format for publication, and for reporting on the contents of a published release.
 
 Currently available document:
 

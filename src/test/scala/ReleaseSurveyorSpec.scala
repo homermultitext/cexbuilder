@@ -2,6 +2,7 @@ package org.homermultitext.hmtcexbuilder
 import org.scalatest.FlatSpec
 import scala.xml._
 import java.io.File
+import edu.holycross.shot.cite._
 
 import edu.holycross.shot.scm._
 
@@ -40,6 +41,27 @@ class ReleaseSurveyorSpec extends FlatSpec {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
     surveyor.overview
   }
+  it should "report on binary image collections" in {
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    surveyor.imageOverview( new File(surveyor.releaseDir, "images"))
+  }
+
+
+  it should "produce an IIPSrv url for an image" in {
+    val img = Cite2Urn("urn:cite2:hmt:vaimg.2017a:VA083RN_0084")
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    val expected = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom//hmt/vaimg/2017a/VA083RN_0084.tif&WID=1000&CVT=JPEG"
+
+    assert(surveyor.iipSrvUrl(img) == expected)
+  }
+
+  it should "include RoI in an IIPSrvUrl if included in URN" in {
+    val img = Cite2Urn("urn:cite2:hmt:vaimg.2017a:VA083RN_0084@0.1107,0.3552,0.05651,0.04688")
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    val expected = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom//hmt/vaimg/2017a/VA083RN_0084.tif&RGN=0.1107,0.3552,0.05651,0.04688&WID=1000&CVT=JPEG"
+    assert(surveyor.iipSrvUrl(img) == expected)
+  }
+
   it should "make it easy to tidy up after all these tests :-)" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
     //tidy(surveyor)
