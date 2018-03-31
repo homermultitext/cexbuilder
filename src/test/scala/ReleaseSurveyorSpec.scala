@@ -9,10 +9,10 @@ import edu.holycross.shot.scm._
 class ReleaseSurveyorSpec extends FlatSpec {
 
   val tinyCex = "src/test/resources/hmt-tiny.cex"
-  val rootDir = "src/test/resources"
-  val releaseId = "test-release"
   val lib = CiteLibrarySource.fromFile(tinyCex)
 
+  val rootDir = "src/test/resources"
+  val releaseId = "test-release"
 
   def tidy(surveyor: ReleaseSurveyor) = {
     val directories =  surveyor.dirMap

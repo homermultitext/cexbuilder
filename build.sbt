@@ -6,7 +6,7 @@ scalaVersion := (crossScalaVersions ).value.last
 
 name := "hmtcexbuilder"
 organization := "org.homermultitext"
-version := "2.1.0"
+version := "2.2.1"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",

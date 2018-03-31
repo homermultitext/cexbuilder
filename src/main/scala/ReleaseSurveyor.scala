@@ -13,7 +13,11 @@ import java.io.PrintWriter
 * of subdirectory where reports are written.
 */
 case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String) {
+
+  /** Base URL for references to HMT Image Citation Tool.*/
   val imtIctBase = "http://www.homermultitext.org/ict2/"
+
+  /** Base URL to an installation of IIPSrv with HMT data. */
   val hmtIipSrvBase = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/"
 
   /** Compose IIPSrv URL for an image. */
@@ -40,8 +44,8 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   def overview = {
     val indexText = homePage
     val indexFile = new File(releaseDir, "index.md")
-    println("write home page to " + indexFile)
     new PrintWriter(indexFile) {write(indexText); close; }
+    imageOverview(dirMap("images"))
   }
 
 
@@ -130,7 +134,6 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
       val hdr = "# Summary for image collection\n\n" +
       s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} images.\n\n"
 
-
       // format a markdown string for each image
       val imgSet = for(k <- objects.objectMap.keySet) yield {
          s"![${k}](${iipSrvUrl(k, 500)}) <br/>${objects.objectMap(k).label}"
@@ -144,8 +147,8 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
             "| " + sliver.mkString(" | ") + " |"
           } else ""
       }
-
       val sizedRows = rows.filter(_.nonEmpty)
+
       // catch any left over if rows/columns didn't work out evenly
       val remndr =  imgRecords.size % colSize
       val trailer = if (remndr != 0)  {
@@ -154,30 +157,12 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
         "| " + sliver.mkString(" | ") + pad + " |\n"
       } else ""
 
-
-
       val tableLabels =  List.fill(colSize)("| ").mkString + "|\n"
       val tableSeparator =  List.fill(colSize)("|:-------------").mkString + "|\n"
 
-      //println(hdrLabels +  hdrSeparator + rows.mkString("\n") + trailer  +  "\n\n")
-
       val reportFile = new File(imageDir, urn.collection + "-summary.md")
       new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
-    }
-
-/*
-
-
-// Collect any left-over cells
-val remndr =  imgContent.size % colSize
-val trailer = if (remndr != 0)  {
-  val sliver = imgContent.slice(imgContent.size - remndr, imgContent.size)
-  val pad = List.fill( colSize - remndr - 1)( " | ").mkString
-  "| " + sliver.mkString(" | ") + pad + " |\n"
-} else ""
-
-
-*/
+    }   // for each collection
   }
 
   //  overview of text-bearing surfaces
