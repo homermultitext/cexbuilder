@@ -7,34 +7,47 @@ import java.io.PrintWriter
 * instantiated as a CiteLibrary.
 *
 * @param lib The published release to survey.
-* @param baseDir Directory where reports are to be written.
-* @param releaseId Identifier this release, used to create name
+* @param baseDir Directory where subdirectory for reports will be created.
+* @param releaseId Identifier for this release, used to create name
 * of subdirectory where reports are written.
 */
 case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String) {
 
 
+  // assemble complete suite of reports
   def overview = {
-
-    /*
-    for (dm <- lib.dataModels.get)  {
-      println("CITE data model:  " + dm.model + " applies to \n\t" + lib.collectionsForModel(dm.model).mkString("\n\t"))
-    }
-    println("OHOC2 model applies to \n\t")
-    for (txt <- lib.textRepository.get.catalog.labelledExemplars) {
-      println("\t"+ txt)
-    }
-    for (txt <- lib.textRepository.get.catalog.labelledVersions) {
-      println(s"\t${txt.label} (${txt.urn})")
-    }
-    */
+    val indexText = homePage
+    val indexFile = new File(releaseDir, "index.md")
+    println("write home page to " + indexFile)
+    new PrintWriter(indexFile) {write(indexText); close; }
   }
 
 
   /** Compose a home page, in markdown format, for this report.
   */
   def homePage: String = {
-    ""
+    val hdr = "# Overview of HMT project release **" + releaseId +"**\n\n" +
+    fileLayoutBoilerPlate  +
+    "Overview of contents of this release by data model:\n\n## Collection data models\n\n"
+
+
+    val dm = for (dm <- lib.dataModels.get)  yield {
+      "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   " + lib.collectionsForModel(dm.model).mkString("\n-   ")
+    }
+
+    val txtsHdr = "\n\n## Texts\n\nThe OHOC2 model of citable texts applies to \n\n"
+    val exemplarList = for (txt <- lib.textRepository.get.catalog.labelledExemplars) yield {
+      s"-   ${txt.label} (${txt.urn})"
+    }
+    val versionList =  for (txt <- lib.textRepository.get.catalog.labelledVersions) yield {
+      s"-   ${txt.label} (${txt.urn})"
+    }
+    hdr + dm.mkString("\n") + txtsHdr+ exemplarList.mkString("\n") + versionList.mkString("\n")
+
+      /*()
+          val home = new File(releaseDir, "index.md")
+          new PrintWriter(home){ write(homePage); close;} */
+
   }
 
   /** Find root directory as a File object,
@@ -79,10 +92,6 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     require(dseDir.exists, "Did not create DSE report directory")
 
     Map( "texts" -> textDir, "images" -> imageDir, "tbs" -> tbsDir, "dse" -> dseDir)
-/*()
-    val home = new File(releaseDir, "index.md")
-    val homePage = "# Overview of HMT project release " + releaseId +"\n\n"
-    new PrintWriter(home){ write(homePage); close;} */
 
   }
 
@@ -109,4 +118,17 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
 
   // overview of DSE triangle
   def dseOverview(dseDir: File)= {}
+
+
+  val fileLayoutBoilerPlate = """
+
+More details are provided in the associated folders:
+
+-   `texts`
+-   `images`
+-   `codices-papyri`
+-   `dse`
+
+
+"""
 }
