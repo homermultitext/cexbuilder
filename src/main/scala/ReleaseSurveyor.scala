@@ -46,6 +46,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val indexFile = new File(releaseDir, "index.md")
     new PrintWriter(indexFile) {write(indexText); close; }
     imageOverview(dirMap("images"))
+    tbsOverview(dirMap("tbs"))
   }
 
 
@@ -108,6 +109,85 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
 
 
 
+  /** Compose report on collections of images modelled as imagemodel objects.
+  *
+  * @param imageDir Directory where image reports should be written.
+  * @param columns Width of output table in columns.
+  * @param thumbSize Widthof thumbnail images in pixels.
+  */
+  def imageOverview(imageDir: File, columns: Int = 5, thumbSize: Int = 400) = {
+    val binaryImageModel = Cite2Urn("urn:cite2:cite:datamodels.v1:imagemodel")
+    val citeCatalog = lib.collectionRepository.get.catalog
+
+    for (urn <- lib.collectionsForModel(binaryImageModel)) {
+      val objects = lib.collectionRepository.get.objectsForCollection(urn)
+
+      val hdr = "# Summary for image collection\n\n" +
+      s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} images.\n\n"
+
+      // format a markdown string for each image
+      val imgSet = for(obj <- objects) yield {
+         s"![${obj.urn}](${iipSrvUrl(obj.urn, thumbSize)}) <br/>${obj.label}"
+      }
+      val imgRecords = imgSet.toSeq.toVector
+      // place the images in a tablewith with specified width (in cells)
+      val rows = for (i <- 0 until imgRecords.size) yield {
+          val oneBasedIndex = i + 1
+          if (oneBasedIndex % columns == 0){
+            val sliver = imgRecords.slice( oneBasedIndex - columns, oneBasedIndex)
+            "| " + sliver.mkString(" | ") + " |"
+          } else ""
+      }
+      val sizedRows = rows.filter(_.nonEmpty)
+
+      // catch any left over if rows/columns didn't work out evenly
+      val remndr =  imgRecords.size % columns
+      val trailer = if (remndr != 0)  {
+        val sliver = imgRecords.slice(imgRecords.size - remndr, imgRecords.size)
+        val pad = List.fill( columns - remndr - 1)( " | ").mkString
+        "| " + sliver.mkString(" | ") + pad + " |\n"
+      } else ""
+
+      val tableLabels =  List.fill(columns)("| ").mkString + "|\n"
+      val tableSeparator =  List.fill(columns)("|:-------------").mkString + "|\n"
+
+      val reportFile = new File(imageDir, urn.collection + "-summary.md")
+      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
+      
+    }   // for each collection
+  }
+
+  /** Compose report on collections of text-bearing surfaces.
+  *
+  * @param tbsDir Directory where TBS reports should be written.
+  */
+  def tbsOverview(tbsDir: File, columns: Int = 5) = {
+    def tbsModel = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
+    val citeCatalog = lib.collectionRepository.get.catalog
+
+
+
+    for (urn <- lib.collectionsForModel(tbsModel)) {
+      val objects = lib.collectionRepository.get.objectsForCollection(urn)
+      val hdr = "# Summary for artifact with texts\n\n" +
+        s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} surfaces.\n\n"
+
+      val urnSeq = objects.map(_.urn)
+
+/*
+      val surfaceSet = for (k <- objects.objectMap.keySet) yield {
+         s"${k} -> ${objects.objectMap(k)}"
+      }*/
+      println(hdr + "\n" + urnSeq.mkString("\n"))
+    }
+  }
+
+  // overview of DSE triangle
+  def dseOverview(dseDir: File)= {
+    val dseModel = Cite2Urn("urn:cite2:cite:datamodels.v1:dse")
+  }
+
+
   // overview of ohco2 editions
   def textOverview(textDir: File) = {
 /*
@@ -120,62 +200,6 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
 }
     */
   }
-
-  /** Compose report on collections of images modelled as imagemodel objects.
-  *
-  * @param imageDir Directory where image reports should be written.
-  */
-  def imageOverview(imageDir: File, colSize: Int = 5) = {
-    val binaryImageModel = Cite2Urn("urn:cite2:cite:datamodels.v1:imagemodel")
-    val citeCatalog = lib.collectionRepository.get.catalog
-
-    for (urn <- lib.collectionsForModel(binaryImageModel)) {
-      val objects = lib.collectionRepository.get.objects ~~ urn
-      val hdr = "# Summary for image collection\n\n" +
-      s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} images.\n\n"
-
-      // format a markdown string for each image
-      val imgSet = for(k <- objects.objectMap.keySet) yield {
-         s"![${k}](${iipSrvUrl(k, 500)}) <br/>${objects.objectMap(k).label}"
-      }
-      val imgRecords = imgSet.toSeq.toVector
-      // place the images in a tablewith with specified width (in cells)
-      val rows = for (i <- 0 until imgRecords.size) yield {
-          val oneBasedIndex = i + 1
-          if (oneBasedIndex % colSize == 0){
-            val sliver = imgRecords.slice( oneBasedIndex - colSize, oneBasedIndex)
-            "| " + sliver.mkString(" | ") + " |"
-          } else ""
-      }
-      val sizedRows = rows.filter(_.nonEmpty)
-
-      // catch any left over if rows/columns didn't work out evenly
-      val remndr =  imgRecords.size % colSize
-      val trailer = if (remndr != 0)  {
-        val sliver = imgRecords.slice(imgRecords.size - remndr, imgRecords.size)
-        val pad = List.fill( colSize - remndr - 1)( " | ").mkString
-        "| " + sliver.mkString(" | ") + pad + " |\n"
-      } else ""
-
-      val tableLabels =  List.fill(colSize)("| ").mkString + "|\n"
-      val tableSeparator =  List.fill(colSize)("|:-------------").mkString + "|\n"
-
-      val reportFile = new File(imageDir, urn.collection + "-summary.md")
-      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
-    }   // for each collection
-  }
-
-  //  overview of text-bearing surfaces
-  def tbsOverview(tbsDir: File) = {
-    def tbsModel = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
-  }
-
-  // overview of DSE triangle
-  def dseOverview(dseDir: File)= {
-    val dseModel = Cite2Urn("urn:cite2:cite:datamodels.v1:dse")
-  }
-
-
 
   /** Compose message about file layout. */
   def fileLayoutBoilerPlate: String =  {

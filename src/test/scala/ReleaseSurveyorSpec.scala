@@ -47,6 +47,11 @@ class ReleaseSurveyorSpec extends FlatSpec {
   }
 
 
+  it should "report on TBS collections" in {
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    surveyor.tbsOverview( new File(surveyor.releaseDir, "codices-papyri"), 2)
+  }
+
   it should "produce an IIPSrv url for an image" in {
     val img = Cite2Urn("urn:cite2:hmt:vaimg.2017a:VA083RN_0084")
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
