@@ -14,6 +14,15 @@ import java.io.PrintWriter
 case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String) {
 
 
+  /** Map of topic label to subdirectory name. */
+  val subdirForTopic = Map (
+    "images" -> "images",
+    "tbs" -> "codices-papyri",
+    "texts" -> "texts",
+    "dse" -> "dse"
+  )
+
+
   // assemble complete suite of reports
   def overview = {
     val indexText = homePage
@@ -28,7 +37,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   def homePage: String = {
     val hdr = "# Overview of HMT project release **" + releaseId +"**\n\n" +
     fileLayoutBoilerPlate  +
-    "Overview of contents of this release by data model:\n\n## Collection data models\n\n"
+    "## Collection data models\n\n"
 
 
     val dm = for (dm <- lib.dataModels.get)  yield {
@@ -36,11 +45,13 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     }
 
     val txtsHdr = "\n\n## Texts\n\nThe OHOC2 model of citable texts applies to \n\n"
-    val exemplarList = for (txt <- lib.textRepository.get.catalog.labelledExemplars) yield {
-      s"-   ${txt.label} (${txt.urn})"
+    val textCatalog = lib.textRepository.get.catalog
+    val exemplarList = for (txt <- textCatalog.labelledExemplars) yield {
+      s"-   ${textCatalog.groupName(txt.urn)}, *${textCatalog.workTitle(txt.urn)}* (${txt.label}: `${txt.urn}`)"
     }
-    val versionList =  for (txt <- lib.textRepository.get.catalog.labelledVersions) yield {
-      s"-   ${txt.label} (${txt.urn})"
+    val versionList =  for (txt <- textCatalog.labelledVersions) yield {
+        s"-   ${textCatalog.groupName(txt.urn)}, *${textCatalog.workTitle(txt.urn)}* (${txt.label}: `${txt.urn})`"
+      //s"-   ${txt.label} (${txt.urn})"
     }
     hdr + dm.mkString("\n") + txtsHdr+ exemplarList.mkString("\n") + versionList.mkString("\n")
 
@@ -75,24 +86,15 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   /** Construct map of required subdirectories.
   */
   def dirMap: Map[String, File] = {
-    val textDir= new File(releaseDir, "texts")
-    textDir.mkdir
-    require(textDir.exists, "Did not create text report directory")
 
-    val imageDir= new File(releaseDir, "images")
-    imageDir.mkdir
-    require(imageDir.exists, "Did not create image report directory")
-
-    val tbsDir= new File(releaseDir, "codices-papyri")
-    tbsDir.mkdir
-    require(tbsDir.exists, "Did not create codices-papyri report directory")
-
-    val dseDir= new File(releaseDir, "dse")
-    dseDir.mkdir
-    require(dseDir.exists, "Did not create DSE report directory")
-
-    Map( "texts" -> textDir, "images" -> imageDir, "tbs" -> tbsDir, "dse" -> dseDir)
-
+    val subdirMap = for (topic <- subdirForTopic.keySet) yield {
+        val subdir = new File(releaseDir, subdirForTopic(topic))
+        subdir.mkdir
+        require(subdir.exists, s"Did not create directory for topic ${topic}")
+        (topic, subdir)
+    }
+    subdirMap.toMap
+    //Map( "texts" -> textDir, "images" -> imageDir, "tbs" -> tbsDir, "dse" -> dseDir)
   }
 
 
@@ -120,15 +122,13 @@ for (txt <- lib.textRepository.get.catalog.labelledVersions) {
   def dseOverview(dseDir: File)= {}
 
 
-  val fileLayoutBoilerPlate = """
 
-More details are provided in the associated folders:
+  /** Compose message about file layout. */
+  def fileLayoutBoilerPlate: String =  {
+    val folderList = for (topic <- subdirForTopic.keySet) yield {
+      "-   `" + subdirForTopic(topic) + "`"
+    }
+    "Note: more details are provided for specific contents of this release in the associated folders:\n\n" + folderList.mkString("\n") + "\n\n"
+  }
 
--   `texts`
--   `images`
--   `codices-papyri`
--   `dse`
-
-
-"""
 }
