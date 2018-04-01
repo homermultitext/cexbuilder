@@ -15,6 +15,6 @@ See documentation: <https://homermultitext.github.io/hmt-cexbuilder/>.
 
 Current release:  **2.4.0**.
 
-See [release notes](releases).
+See [release notes](releases.md).
 
 Binary library for all releases published to bintray for Scala 2.12.
