@@ -8,7 +8,8 @@ import edu.holycross.shot.scm._
 
 class ReleaseSurveyorSpec extends FlatSpec {
 
-  val tinyCex = "src/test/resources/hmt-tiny.cex"
+  //val tinyCex = "src/test/resources/hmt-tiny.cex"
+  val tinyCex = "src/test/resources/hmt-test.cex"
   val lib = CiteLibrarySource.fromFile(tinyCex)
 
   val rootDir = "src/test/resources"
@@ -39,19 +40,25 @@ class ReleaseSurveyorSpec extends FlatSpec {
   }
   it should "compose a home page for the report" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
-    surveyor.overview
+    surveyor.overview(6, 400)
   }
   it should "report on binary image collections" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
-    surveyor.imageOverview( new File(surveyor.releaseDir, "images"), 2)
+    surveyor.imageOverview( new File(surveyor.releaseDir, "images"), 2, 400)
   }
 
 
   it should "report on TBS collections" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
-    surveyor.tbsOverview( new File(surveyor.releaseDir, "codices-papyri"), 2)
+    surveyor.tbsOverview( new File(surveyor.releaseDir, "codices-papyri"), 6, 250)
   }
 
+/*
+  it should "report on DSE collections" in {
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    surveyor.dseOverview( new File(surveyor.releaseDir, "dse"), 6, 250)
+  }
+*/
   it should "produce an IIPSrv url for an image" in {
     val img = Cite2Urn("urn:cite2:hmt:vaimg.2017a:VA083RN_0084")
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)

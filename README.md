@@ -13,7 +13,7 @@ See documentation: <https://homermultitext.github.io/hmt-cexbuilder/>.
 
 ## Releases
 
-Current release:  **2.2.1**.
+Current release:  **2.4.0**.
 
 See [release notes](releases).
 

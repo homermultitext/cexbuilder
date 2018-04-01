@@ -1,6 +1,12 @@
 # Release notes
 
 
+
+**2.4.0**:  writes dse reports by collection.
+
+
+**2.3.0**:  writes tbs reports by collection.
+
 **2.2.1**:  actually includes new image reporting functionality in reporting.
 
 **2.2.0**:  writes image reports by collection.

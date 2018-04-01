@@ -1,6 +1,7 @@
 package org.homermultitext.hmtcexbuilder
 import edu.holycross.shot.scm._
 import edu.holycross.shot.cite._
+import edu.holycross.shot.dse._
 import java.io.File
 import java.io.PrintWriter
 
@@ -15,7 +16,7 @@ import java.io.PrintWriter
 case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String) {
 
   /** Base URL for references to HMT Image Citation Tool.*/
-  val imtIctBase = "http://www.homermultitext.org/ict2/"
+  val hmtIctBase = "http://www.homermultitext.org/ict2/"
 
   /** Base URL to an installation of IIPSrv with HMT data. */
   val hmtIipSrvBase = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/"
@@ -40,13 +41,18 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   )
 
 
-  // assemble complete suite of reports
-  def overview = {
+  /** Assemble a complete suite of reports for a this release.
+  *
+  *  @param columns Width in columns of tables with thumbnail images.
+  *  @param thumbSize Width in pixes of thumbnail images.
+  */
+  def overview(columns: Int = 6, thumbSize: Int = 400) = {
     val indexText = homePage
     val indexFile = new File(releaseDir, "index.md")
     new PrintWriter(indexFile) {write(indexText); close; }
-    imageOverview(dirMap("images"))
-    tbsOverview(dirMap("tbs"))
+    imageOverview(dirMap("images"), columns, thumbSize)
+    tbsOverview(dirMap("tbs"), columns,thumbSize)
+    dseOverview(dirMap("dse"), columns,thumbSize)
   }
 
 
@@ -115,7 +121,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   * @param columns Width of output table in columns.
   * @param thumbSize Widthof thumbnail images in pixels.
   */
-  def imageOverview(imageDir: File, columns: Int = 5, thumbSize: Int = 400) = {
+  def imageOverview(imageDir: File, columns: Int, thumbSize: Int) = {
     val binaryImageModel = Cite2Urn("urn:cite2:cite:datamodels.v1:imagemodel")
     val citeCatalog = lib.collectionRepository.get.catalog
 
@@ -153,39 +159,130 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
 
       val reportFile = new File(imageDir, urn.collection + "-summary.md")
       new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
-      
+
     }   // for each collection
   }
 
   /** Compose report on collections of text-bearing surfaces.
   *
   * @param tbsDir Directory where TBS reports should be written.
+  * @param columns Width of output table in columns.
+  * @param thumbSize Widthof thumbnail images in pixels.
   */
-  def tbsOverview(tbsDir: File, columns: Int = 5) = {
+  def tbsOverview(tbsDir: File, columns: Int, thumbSize: Int) = {
     def tbsModel = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
     val citeCatalog = lib.collectionRepository.get.catalog
-
-
 
     for (urn <- lib.collectionsForModel(tbsModel)) {
       val objects = lib.collectionRepository.get.objectsForCollection(urn)
       val hdr = "# Summary for artifact with texts\n\n" +
-        s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} surfaces.\n\n"
+        s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} surfaces.  The following table illustrates each surface in sequence with its default image.\n\n"
 
-      val urnSeq = objects.map(_.urn)
+      // write a markdown entry for each entry
+      val md = for(obj <- objects) yield {
+        val imgProp = obj.urn.addProperty("image")
+        val img:Cite2Urn = obj.propertyValue(imgProp) match {
+          case u: Cite2Urn => u
+          case _ => throw new Exception(s"Value for image property on ${obj} was note a Cite2Urn.")
+        }
+        s"![${obj.urn}](${iipSrvUrl(img, thumbSize)}) <br/>${obj.label} (`${obj.urn}`)"
+      }
+      // organize objects in a table
+      val rows = for (i <- 0 until md.size) yield {
+        val oneBasedIndex = i + 1
+        if (oneBasedIndex % columns == 0){
+          val sliver = md.slice( oneBasedIndex - columns, oneBasedIndex)
+          "| " + sliver.mkString(" | ") + " |"
+        } else ""
+      }
+      val sizedRows = rows.filter(_.nonEmpty)
 
-/*
-      val surfaceSet = for (k <- objects.objectMap.keySet) yield {
-         s"${k} -> ${objects.objectMap(k)}"
-      }*/
-      println(hdr + "\n" + urnSeq.mkString("\n"))
+      // catch any left over if rows/columns didn't work out evenly
+      val remndr =  md.size % columns
+      val trailer = if (remndr != 0)  {
+        val sliver = md.slice(md.size - remndr, md.size)
+        val pad = List.fill( columns - remndr - 1)( " | ").mkString
+        "| " + sliver.mkString(" | ") + pad + " |\n"
+      } else ""
+
+      val tableLabels =  List.fill(columns)("| ").mkString + "|\n"
+      val tableSeparator =  List.fill(columns)("|:-------------").mkString + "|\n"
+
+      val reportFile = new File(tbsDir, urn.collection + "-summary.md")
+      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
     }
   }
 
-  // overview of DSE triangle
-  def dseOverview(dseDir: File)= {
+    /** Compose report on collections of DSE relations.
+    *
+    * @param dseDir Directory where TBS reports should be written.
+    * @param columns Width of output table in columns.
+    * @param thumbSize Widthof thumbnail images in pixels.
+    */
+  def dseOverview(dseDir: File, columns: Int, thumbSize: Int)= {
     val dseModel = Cite2Urn("urn:cite2:cite:datamodels.v1:dse")
+    val citeCatalog = lib.collectionRepository.get.catalog
+
+    for (urn <- lib.collectionsForModel(dseModel)) {
+      val objects = lib.collectionRepository.get.objectsForCollection(urn)
+
+      val dseRecords = for (obj <-  objects) yield {
+        val imgProp = obj.urn.addProperty("imageroi")
+        val img:Cite2Urn = obj.propertyValue(imgProp) match {
+          case u: Cite2Urn => u
+          case _ => throw new Exception(s"Value for image property on ${obj} was note a Cite2Urn.")
+        }
+
+        val textProp = obj.urn.addProperty("passage")
+        val passage:CtsUrn = obj.propertyValue(textProp) match {
+          case u: CtsUrn => u
+          case _ => throw new Exception(s"Value for texxt property on ${obj} was note a Cts2Urn.")
+        }
+
+        val surfaceProp = obj.urn.addProperty("surface")
+        val surface:Cite2Urn = obj.propertyValue(surfaceProp) match {
+          case u: Cite2Urn => u
+          case _ => throw new Exception(s"Value for surface property on ${obj} was note a Cite2Urn.")
+        }
+        DsePassage(obj.urn, obj.label, passage, img, surface)
+      }
+      val dse = Dse(dseRecords)
+
+      // THIS SHOULD BE A DSE FUNCTION!
+      val tbsCollections = dse.tbs.map(_.dropSelector.dropProperty)
+
+      val hdr = "# Summary for digital scholarly edition releations\n\n" +
+        s"**${citeCatalog.collection(urn).get.collectionLabel}** (`${urn}`):  total of ${objects.size} relations.\n\nEntries in the following list are organized by the order of surfaces in each codex or papyrus, and are linked to visualizations of texts appearing on the surface.\n\n"
+
+
+      // now get sequence of those pages...
+      // Need to verify that value of codex is OK: otherwise,
+      // you'll get hideous crashing with exceptions.
+      val md = for (codex <- tbsCollections) yield {
+        println("Preparing DSE record for " + codex)
+        val docHeader = s"## Records for ${citeCatalog.collection(codex).get.collectionLabel}\n\n"
+        println(s"\n\nAssembling DSE records for ${codex}.")
+        println("Please be patient...")
+        val pages = lib.collectionRepository.get.objectsForCollection(codex)
+        val md = for (pg <- pages) yield {
+          println("\tpage "+ pg + "...")
+          s"-  [${pg.urn.objectComponent}:  ${dse.textsForTbs(pg.urn).size} text passages recorded.](${dse.ictForSurface(pg.urn, hmtIctBase)})"
+        }
+        println("Made " + md.size + " records.")
+        val reportFile = new File(dseDir, codex.collection + "-dse-summary.md")
+        println("Writing report to " + reportFile)
+        new PrintWriter(reportFile){write(hdr + md.mkString("\n") + "\n\n") ; close;}
+      }
+    }
   }
+
+
+
+
+
+
+
+
 
 
   // overview of ohco2 editions
