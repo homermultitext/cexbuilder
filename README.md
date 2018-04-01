@@ -17,4 +17,4 @@ Current release:  **2.4.0**.
 
 See [release notes](releases.md).
 
-Binary library for all releases published to bintray for Scala 2.12.
+Binary library for all releases published to bintray for Scala 2.11 and 2.12.
