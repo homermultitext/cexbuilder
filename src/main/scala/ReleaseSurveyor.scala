@@ -63,8 +63,13 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     fileLayoutBoilerPlate  +
     "## Collection data models\n\n"
 
+
+    val citeCatalog = lib.collectionRepository.get.catalog
     val dm = for (dm <- lib.dataModels.get)  yield {
-      "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   " + lib.collectionsForModel(dm.model).mkString("\n-   ")
+      val modelLabel = "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   "
+      val appliedTo = lib.collectionsForModel(dm.model)
+      val display = appliedTo.map(u => s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")
+      modelLabel + display.mkString("\n-   ")
     }
 
     val txtsHdr = "\n\n## Texts\n\nThe OHOC2 model of citable texts applies to \n\n"
@@ -133,7 +138,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
 
       // format a markdown string for each image
       val imgSet = for(obj <- objects) yield {
-         s"![${obj.urn}](${iipSrvUrl(obj.urn, thumbSize)}) <br/>${obj.label}"
+         s"[![${obj.urn}](${iipSrvUrl(obj.urn, thumbSize)})](${hmtIctBase}?urn=${obj.urn}) <br/>${obj.label} (`${obj.urn}`)"
       }
       val imgRecords = imgSet.toSeq.toVector
       // place the images in a tablewith with specified width (in cells)
@@ -185,7 +190,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
           case u: Cite2Urn => u
           case _ => throw new Exception(s"Value for image property on ${obj} was note a Cite2Urn.")
         }
-        s"![${obj.urn}](${iipSrvUrl(img, thumbSize)}) <br/>${obj.label} (`${obj.urn}`)"
+        s"[![${obj.urn}](${iipSrvUrl(img, thumbSize)})](${hmtIctBase}?urn=${img}) <br/>${obj.label} (`${obj.urn}`)"
       }
       // organize objects in a table
       val rows = for (i <- 0 until md.size) yield {

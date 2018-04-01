@@ -2,6 +2,8 @@
 
 
 
+**2.5.0**:  link thumbnail images to ICT display.  Improved labelling in survey reports.
+
 **2.4.0**:  writes dse reports by collection.
 
 
