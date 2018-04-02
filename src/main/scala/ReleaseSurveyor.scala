@@ -50,10 +50,12 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val indexText = homePage
     val indexFile = new File(releaseDir, "index.md")
     new PrintWriter(indexFile) {write(indexText); close; }
+    textOverview(dirMap("texts"))
+    
     imageOverview(dirMap("images"), columns, thumbSize)
     tbsOverview(dirMap("tbs"), columns,thumbSize)
     dseOverview(dirMap("dse"), columns,thumbSize)
-    textOverview(dirMap("texts"))
+
   }
 
 
