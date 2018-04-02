@@ -8,7 +8,7 @@ import edu.holycross.shot.scm._
 
 class ReleaseSurveyorTextsSpec extends FlatSpec {
 
-  val tinyCex = "src/test/resources/hmt-tiny.cex"
+  val tinyCex = "src/test/resources/hmt-wtexts.cex"
   //val tinyCex = "src/test/resources/hmt-rc-A.cex"
   val lib = CiteLibrarySource.fromFile(tinyCex)
 
