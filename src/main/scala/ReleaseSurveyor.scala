@@ -163,7 +163,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
       val tableSeparator =  List.fill(columns)("|:-------------").mkString + "|\n"
 
       val reportFile = new File(imageDir, urn.collection + "-summary.md")
-      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
+      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + "\n "+ trailer  +  "\n\n") ; close;}
 
     }   // for each collection
   }
@@ -214,7 +214,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
       val tableSeparator =  List.fill(columns)("|:-------------").mkString + "|\n"
 
       val reportFile = new File(tbsDir, urn.collection + "-summary.md")
-      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + trailer  +  "\n\n") ; close;}
+      new PrintWriter(reportFile){write(hdr + tableLabels +  tableSeparator + sizedRows.mkString("\n") + "\n" + trailer  +  "\n\n") ; close;}
     }
   }
 

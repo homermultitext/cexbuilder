@@ -40,7 +40,7 @@ class ReleaseSurveyorSpec extends FlatSpec {
   }
   it should "compose a home page for the report" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
-    surveyor.overview(6, 400)
+    surveyor.overview(2, 400)
   }
   it should "report on binary image collections" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
