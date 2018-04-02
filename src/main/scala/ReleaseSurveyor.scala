@@ -292,17 +292,22 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val corpus = lib.textRepository.get.corpus
     val alphaGroups = ctsCatalog.labelledGroups.toSeq.sortBy(_.label)
 
-    val lines = for (group <- alphaGroups) yield {
 
+    // collect lines of text for report by successively
+    // drilling down table of contents.
+    // 1. text group level
+    val lines = for (group <- alphaGroups) yield {
       val worksFromGroupToVersions = ctsCatalog.toc(group)
 
       val groupHdr = worksFromGroupToVersions.size match {
         case 1 =>  s"## ${group.label}: ${worksFromGroupToVersions.size} work\n\n"
         case _ =>  s"## ${group.label}: ${worksFromGroupToVersions.size} works\n\n"
       }
-
+      // 2. work level
       val wkData = for (wk <- worksFromGroupToVersions.keySet.toSeq.sortBy(_.label))  yield {
         val versionsFromWorkToExemplar = worksFromGroupToVersions(wk)
+
+        // 3. version level
         val versionData = for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) yield {
           val nodes = corpus ~~ vers.urn
           s"-   ${vers.label} (`${vers.urn}`):  ${nodes.size} citable units"
@@ -310,32 +315,11 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
 
         s"### ${wk.label}\n\n" + versionData.mkString("\n") +"\n\n"
       }
-      /*
-//println(s"\t-  ${wk.label} has " + versionsFromWorkToExemplar.size + " version(s).")
-|
-|     for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) {
-|       val exemplars = versionsFromWorkToExemplar(vers)
-|       println(s"\t\t-  ${vers.label} has " + exemplars.size + " exemplar(s).")
-|     }
-|*/
       groupHdr +  wkData.mkString("\n") +"\n\n"
-  /*
-
-
-     |   for (wk <- worksFromGroupToVersions.keySet.toSeq.sortBy(_.label)) {
-     |     val versionsFromWorkToExemplar = worksFromGroupToVersions(wk)
-     |     println(s"\t-  ${wk.label} has " + versionsFromWorkToExemplar.size + " version(s).")
-     |
-     |     for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) {
-     |       val exemplars = versionsFromWorkToExemplar(vers)
-     |       println(s"\t\t-  ${vers.label} has " + exemplars.size + " exemplar(s).")
-     |     }
-     |
-     |   }
-     |*/
       }
-      println(lines.mkString("\n"))
 
+      val outFile = new File(textDir, "texts-summary.md")
+      new PrintWriter(outFile){ write(lines.mkString("\n")); close;}
   }
 
   /** Compose message about file layout. */

@@ -1,5 +1,6 @@
 # Release notes
 
+**2.6.1**:  actually write text report to file.
 
 **2.6.0**:  add detailed reporting on citable texts in a release.
 
