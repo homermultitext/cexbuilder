@@ -53,6 +53,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     imageOverview(dirMap("images"), columns, thumbSize)
     tbsOverview(dirMap("tbs"), columns,thumbSize)
     dseOverview(dirMap("dse"), columns,thumbSize)
+    textOverview(dirMap("texts"))
   }
 
 
@@ -282,25 +283,59 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   }
 
 
-
-
-
-
-
-
-
-
-  // overview of ohco2 editions
+  /** Compose report on OHCO2 editions.
+  *
+  * @param textDir Directory where TBS reports should be written.
+  */
   def textOverview(textDir: File) = {
-/*
-println("OHOC2 model applies to \n\t")
-for (txt <- lib.textRepository.get.catalog.labelledExemplars) {
-  println("\t"+ txt)
-}
-for (txt <- lib.textRepository.get.catalog.labelledVersions) {
-  println(s"\t${txt.label} (${txt.urn})")
-}
-    */
+    val ctsCatalog = lib.textRepository.get.catalog
+    val corpus = lib.textRepository.get.corpus
+    val alphaGroups = ctsCatalog.labelledGroups.toSeq.sortBy(_.label)
+
+    val lines = for (group <- alphaGroups) yield {
+
+      val worksFromGroupToVersions = ctsCatalog.toc(group)
+
+      val groupHdr = worksFromGroupToVersions.size match {
+        case 1 =>  s"## ${group.label}: ${worksFromGroupToVersions.size} work\n\n"
+        case _ =>  s"## ${group.label}: ${worksFromGroupToVersions.size} works\n\n"
+      }
+
+      val wkData = for (wk <- worksFromGroupToVersions.keySet.toSeq.sortBy(_.label))  yield {
+        val versionsFromWorkToExemplar = worksFromGroupToVersions(wk)
+        val versionData = for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) yield {
+          val nodes = corpus ~~ vers.urn
+          s"-   ${vers.label} (`${vers.urn}`):  ${nodes.size} citable units"
+        }
+
+        s"### ${wk.label}\n\n" + versionData.mkString("\n") +"\n\n"
+      }
+      /*
+//println(s"\t-  ${wk.label} has " + versionsFromWorkToExemplar.size + " version(s).")
+|
+|     for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) {
+|       val exemplars = versionsFromWorkToExemplar(vers)
+|       println(s"\t\t-  ${vers.label} has " + exemplars.size + " exemplar(s).")
+|     }
+|*/
+      groupHdr +  wkData.mkString("\n") +"\n\n"
+  /*
+
+
+     |   for (wk <- worksFromGroupToVersions.keySet.toSeq.sortBy(_.label)) {
+     |     val versionsFromWorkToExemplar = worksFromGroupToVersions(wk)
+     |     println(s"\t-  ${wk.label} has " + versionsFromWorkToExemplar.size + " version(s).")
+     |
+     |     for (vers <- versionsFromWorkToExemplar.keySet.toSeq.sortBy(_.label) ) {
+     |       val exemplars = versionsFromWorkToExemplar(vers)
+     |       println(s"\t\t-  ${vers.label} has " + exemplars.size + " exemplar(s).")
+     |     }
+     |
+     |   }
+     |*/
+      }
+      println(lines.mkString("\n"))
+
   }
 
   /** Compose message about file layout. */

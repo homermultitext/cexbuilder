@@ -1,5 +1,8 @@
 # Release notes
 
+
+**2.6.0**:  add detailed reporting on citable texts in a release.
+
 **2.5.1**:  fixes a bug in appending trailing cells to tabular display of images.
 
 **2.5.0**:  link thumbnail images to ICT display.  Improved labelling in survey reports.
