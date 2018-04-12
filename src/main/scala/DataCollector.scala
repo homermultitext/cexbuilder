@@ -51,13 +51,12 @@ object DataCollector {
   }
 
 
-  def filesInDir(dir: File, extension: String): Set[File] = {
+  def filesInDir(dir: File, extension: String): Vector[File] = {
     if (! dir.exists) {
       throw new Exception("DataCollector: no directory " + dir + " found.")
     } else {
       val fileVector = dir.listFiles.filter(_.isFile).toVector
-      val files = fileVector.filter(_.getName.endsWith(extension))
-      files.toSet
+      fileVector.filter(_.getName.endsWith(extension))
     }
   }
 
@@ -67,7 +66,7 @@ object DataCollector {
   * @param dir Directory to look in.
   * @param extension File extension to match.
   */
-  def filesInDir(dir: String, extension: String): Set[File] = {
+  def filesInDir(dir: String, extension: String): Vector[File] = {
     val libraryDir = new File(dir)
     filesInDir(libraryDir, extension)
   }

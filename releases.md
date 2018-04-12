@@ -1,5 +1,7 @@
 # Release notes
 
+**3.0.0**:  API-breaking change returning `Vector`s rather than `Set`s of files when reading data from directories.
+
 **2.6.2**:  sequence report writing so other reports are complete before DSE analysis begins.
 
 **2.6.1**:  actually write text report to file.

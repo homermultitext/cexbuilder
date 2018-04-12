@@ -38,7 +38,7 @@ class IliadCompositeSpec extends FlatSpec {
     val srcDir = "src/test/resources/iliad-xml"
     val outDir = "src/test/resources/iliad-composites"
     IliadComposite.composite(srcDir, outDir)
-    val expectedOutput = Set(
+    val expectedOutput = Vector(
       new File ("src/test/resources/iliad-composites/va_iliad.xml")
     )
     val actualOutput = DataCollector.filesInDir(outDir, "xml")

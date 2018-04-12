@@ -36,7 +36,7 @@ class ScholiaCompositeSpec extends FlatSpec {
     val srcDir = "src/test/resources/scholia-xml"
     val outDir = "src/test/resources/scholia-composites"
     ScholiaComposite.composite(srcDir, outDir)
-    val expectedOutput = Set(
+    val expectedOutput = Vector(
       new File ("src/test/resources/scholia-composites/va_composite_scholia_msA.xml"),
       new File ("src/test/resources/scholia-composites/va_composite_scholia_msAext.xml"),
       new File ("src/test/resources/scholia-composites/va_composite_scholia_msAextra.xml"),

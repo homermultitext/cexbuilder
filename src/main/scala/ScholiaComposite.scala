@@ -37,7 +37,7 @@ object ScholiaComposite {
   * @param document Document identifier for scholia document (work ID in the document's CTS URN).
   * @param files XML files to extract content from.
   */
-  def compositeDocument(document : String, files: Set[File]): String = {
+  def compositeDocument(document : String, files: Vector[File]): String = {
     val lines = for (f <- files) yield {
       val root = XML.loadFile(f)
       val teiGroup = root \ "text" \ "group"

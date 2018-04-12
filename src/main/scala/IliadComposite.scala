@@ -20,7 +20,7 @@ object IliadComposite {
   * @param document Document identifier for scholia document (work ID in the document's CTS URN).
   * @param files XML files to extract content from.
   */
-  def compositeDocument(files: Set[File]): String = {
+  def compositeDocument(files: Vector[File]): String = {
     val lines = for (f <- files) yield {
       val root = XML.loadFile(f)
       val teiDiv = root \ "text" \ "body" \ "div"
