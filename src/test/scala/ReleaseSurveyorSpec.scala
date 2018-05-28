@@ -79,5 +79,12 @@ class ReleaseSurveyorSpec extends FlatSpec {
     //tidy(surveyor)
   }
 
+  it should "write a rational home page" in {
+    val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
+    println(surveyor.homePage)
+  }
+
+
+
 
 }

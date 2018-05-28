@@ -75,7 +75,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
       /*
       val appliedTo = lib.collectionsForModel(dm.model)
       val display = appliedTo.map(u => s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")  */
-      modelLabel + display.mkString("\n-   ")
+      modelLabel + display
 
     }
 
@@ -258,7 +258,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
         }
         DsePassage(obj.urn, obj.label, passage, img, surface)
       }
-      val dse = Dse(dseRecords)
+      val dse = DseVector(dseRecords)
 
       // THIS SHOULD BE A DSE FUNCTION!
       val tbsCollections = dse.tbs.map(_.dropSelector.dropProperty)

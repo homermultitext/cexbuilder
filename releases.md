@@ -1,5 +1,13 @@
 # Release notes
 
+
+**3.1.0**:  new functionality in dependent libraries.
+
+
+**3.0.4**:  bug fixes in multiple dependencies.
+
+**3.0.3**:  fix mangled string display
+
 **3.0.2**:  eliminate duplicate display of data models in home page of reports.
 
 **3.0.1**:  correct name of output directory for reports.

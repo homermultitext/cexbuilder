@@ -5,17 +5,19 @@ scalaVersion := (crossScalaVersions ).value.last
 
 name := "hmtcexbuilder"
 organization := "org.homermultitext"
-version := "3.0.2"
+version := "3.1.0"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
 
   "edu.holycross.shot.cite" %% "xcite" % "3.3.0",
-  "edu.holycross.shot" %% "ohco2" % "10.7.0",
-  "org.homermultitext" %% "hmt-textmodel" % "2.2.1",
+  "edu.holycross.shot" %% "ohco2" % "10.8.1",
+  "org.homermultitext" %% "hmt-textmodel" % "2.2.3",
   "edu.holycross.shot" %% "cex" % "6.2.1",
-  "edu.holycross.shot" %% "dse" % "2.2.1",
-  "edu.holycross.shot" %% "scm" % "6.0.0"
+  "edu.holycross.shot" %% "dse" % "3.1.0",
+  "edu.holycross.shot" %% "scm" % "6.1.0",
+  "edu.holycross.shot" %% "citerelations" % "2.2.0",
+  "edu.holycross.shot" %% "dse" % "3.1.0"
 )
 
 tutTargetDirectory := file("docs")

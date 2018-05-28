@@ -30,11 +30,7 @@ class ReleaseSurveyorDseSpec extends FlatSpec {
     surveyor.releaseDir.delete
   }
 
-  "A ReleaseSurveyor" should "do things" in pending
-
-
-
-  it should "report on DSE collections" in {
+  "A ReleaseSurveyor" should "report on DSE collections" in {
     val surveyor = ReleaseSurveyor(lib,rootDir,releaseId)
     surveyor.dseOverview( new File(surveyor.releaseDir, "dse"), 6, 250)
   }
