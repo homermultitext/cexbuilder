@@ -1,5 +1,10 @@
 # Release notes
 
+**3.0.2**:  eliminate duplicate display of data models in home page of reports.
+
+**3.0.1**:  correct name of output directory for reports.
+
+
 **3.0.0**:  API-breaking change returning `Vector`s rather than `Set`s of files when reading data from directories.
 
 **2.6.2**:  sequence report writing so other reports are complete before DSE analysis begins.

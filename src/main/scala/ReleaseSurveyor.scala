@@ -51,7 +51,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val indexFile = new File(releaseDir, "index.md")
     new PrintWriter(indexFile) {write(indexText); close; }
     textOverview(dirMap("texts"))
-    
+
     imageOverview(dirMap("images"), columns, thumbSize)
     tbsOverview(dirMap("tbs"), columns,thumbSize)
     dseOverview(dirMap("dse"), columns,thumbSize)
@@ -70,9 +70,13 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val citeCatalog = lib.collectionRepository.get.catalog
     val dm = for (dm <- lib.dataModels.get)  yield {
       val modelLabel = "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   "
+      val u = dm.collection
+      val display = s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")
+      /*
       val appliedTo = lib.collectionsForModel(dm.model)
-      val display = appliedTo.map(u => s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")
+      val display = appliedTo.map(u => s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")  */
       modelLabel + display.mkString("\n-   ")
+
     }
 
     val txtsHdr = "\n\n## Texts\n\nThe OHOC2 model of citable texts applies to \n\n"
@@ -102,7 +106,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
   * ensuring that it has been created.
   */
   def releaseDir : File = {
-    val reportDir = new File(rootDir, s"${releaseId}-summary")
+    val reportDir = new File(rootDir, s"hmt-${releaseId}-summary")
     if (!reportDir.exists){
       reportDir.mkdir
     }
