@@ -71,7 +71,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
     val dm = for (dm <- lib.dataModels.get)  yield {
       val modelLabel = "\n**" + dm.label + s"** (`${dm.model}`) applies to \n\n-   "
       val u = dm.collection
-      val display = s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")
+      val display = s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)"
       /*
       val appliedTo = lib.collectionsForModel(dm.model)
       val display = appliedTo.map(u => s"${citeCatalog.collection(u).get.collectionLabel} (`${u}`)")  */
