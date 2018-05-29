@@ -1,4 +1,4 @@
-OHCO2package org.homermultitext.hmtcexbuilder
+package org.homermultitext.hmtcexbuilder
 import edu.holycross.shot.scm._
 import edu.holycross.shot.cite._
 import edu.holycross.shot.dse._
