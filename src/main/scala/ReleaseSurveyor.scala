@@ -1,4 +1,4 @@
-package org.homermultitext.hmtcexbuilder
+OHCO2package org.homermultitext.hmtcexbuilder
 import edu.holycross.shot.scm._
 import edu.holycross.shot.cite._
 import edu.holycross.shot.dse._
@@ -79,7 +79,7 @@ case class ReleaseSurveyor(lib: CiteLibrary, baseDir: String, releaseId: String)
 
     }
 
-    val txtsHdr = "\n\n## Texts\n\nThe OHOC2 model of citable texts applies to \n\n"
+    val txtsHdr = "\n\n## Texts\n\nThe OHCO2 model of citable texts applies to \n\n"
     val textCatalog = lib.textRepository.get.catalog
     val exemplarList = for (txt <- textCatalog.labelledExemplars) yield {
       s"-   ${textCatalog.groupName(txt.urn)}, *${textCatalog.workTitle(txt.urn)}* (${txt.label}: `${txt.urn}`)"
