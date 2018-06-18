@@ -1,5 +1,7 @@
 # Release notes
 
+**3.1.2**:  updates to numerous underyling libraries
+
 **3.1.1**:  speling.
 
 **3.1.0**:  new functionality in dependent libraries.
