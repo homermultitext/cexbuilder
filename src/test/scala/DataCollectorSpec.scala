@@ -41,4 +41,13 @@ class DataCollectorSpec extends FlatSpec {
     val expectedLabels = Set("ctscatalog", "ctsdata", "cexversion", "citelibrary")
     assert(cex.blockLabels == expectedLabels)
   }
+
+
+  it should "drop headers from collected files as specified" in {
+    val srcDir = "src/test/resources/withHeaders"
+    val dataPlusHeader = DataCollector.compositeFiles(srcDir, "cex")
+    assert(dataPlusHeader.split("\n").size == 3)
+    val dataOnly  = DataCollector.compositeFiles(srcDir, "cex", 1)
+    assert(dataOnly.split("\n").size == 2)
+  }
 }

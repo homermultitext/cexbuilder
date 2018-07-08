@@ -1,5 +1,7 @@
 # Release notes
 
+**3.2.0**:  add option to drop header lines when collecting data from typed files.
+
 **3.1.2**:  updates to numerous underyling libraries
 
 **3.1.1**:  speling.

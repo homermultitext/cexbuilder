@@ -3,6 +3,9 @@ import scala.xml._
 import java.io.File
 import scala.io.Source
 
+
+/** Utility objectn
+*/
 object DataCollector {
 
 
@@ -73,14 +76,17 @@ object DataCollector {
 
 
   /** Create a single String concatenating content
-  * of all CEX files in a given directory.
+  * of all CEX files in a given directory having a given file extension.
   *
   * @param dir Directory to collect content from.
+  * @param extension File name extension of files to collect.
+  * @param dropLines Number of lines to drop from beginning of file,
+  * 0 if none should be dropped.
   */
-  def compositeFiles(dir: String, extension: String = "cex"): String = {
+  def compositeFiles(dir: String, extension: String = "cex", dropLines: Int = 0): String = {
     def fileSet = filesInDir(dir, extension)
     def txts = for (f <- fileSet) yield {
-      val lines = scala.io.Source.fromFile(f).getLines.toVector
+      val lines = scala.io.Source.fromFile(f).getLines.toVector.drop(dropLines)
       lines.mkString("\n")
     }
     txts.toSeq.mkString("\n") + "\n"
