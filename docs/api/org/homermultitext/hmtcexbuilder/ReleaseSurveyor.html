@@ -127,23 +127,23 @@
                         <a href="IliadComposite$.html" title="Factory for creating CEX composite texts of Iliads from multiple XML source files in a given directory.">IliadComposite</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary."></a>
-                        <a href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary.">ReleaseSurveyor</a>
+                        <a class="class" href="" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary."></a>
+                        <a href="" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary.">ReleaseSurveyor</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="object" href="" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory."></a>
-                        <a href="" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory.">ScholiaComposite</a>
+                        <a class="object" href="ScholiaComposite$.html" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory."></a>
+                        <a href="ScholiaComposite$.html" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory.">ScholiaComposite</a>
                       </li>
               </ul>
             </div>
           </div>
           <div id="content">
-            <body class="object value">
+            <body class="class type">
       <div id="definition">
-        <div class="big-circle object">o</div>
+        <div class="big-circle class">c</div>
         <p id="owner"><a href="../../index.html" class="extype" name="org">org</a>.<a href="../index.html" class="extype" name="org.homermultitext">homermultitext</a>.<a href="index.html" class="extype" name="org.homermultitext.hmtcexbuilder">hmtcexbuilder</a></p>
-        <h1>ScholiaComposite<span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html" title="Permalink">
+        <h1>ReleaseSurveyor<span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -153,21 +153,22 @@
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">ScholiaComposite</span>
+        <span class="name">ReleaseSurveyor</span><span class="params">(<span name="lib">lib: <span class="extype" name="edu.holycross.shot.scm.CiteLibrary">CiteLibrary</span></span>, <span name="baseDir">baseDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="releaseId">releaseId: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for creating CEX composite texts of scholia from
-multiple XML source files in a given directory.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Class for creating overviews of a published release of HMT
+instantiated as a CiteLibrary.
+</p></div><dl class="paramcmts block"><dt class="param">lib</dt><dd class="cmt"><p>The published release to survey.</p></dd><dt class="param">baseDir</dt><dd class="cmt"><p>Directory where subdirectory for reports will be created.</p></dd><dt class="param">releaseId</dt><dd class="cmt"><p>Identifier for this release, used to create name
+of subdirectory where reports are written.</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -193,7 +194,7 @@ multiple XML source files in a given directory.
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="org.homermultitext.hmtcexbuilder.ScholiaComposite"><span>ScholiaComposite</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor"><span>ReleaseSurveyor</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -211,7 +212,27 @@ multiple XML source files in a given directory.
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(lib:edu.holycross.shot.scm.CiteLibrary,baseDir:String,releaseId:String):org.homermultitext.hmtcexbuilder.ReleaseSurveyor"></a><a id="&lt;init&gt;:ReleaseSurveyor"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#&lt;init&gt;(lib:edu.holycross.shot.scm.CiteLibrary,baseDir:String,releaseId:String):org.homermultitext.hmtcexbuilder.ReleaseSurveyor" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ReleaseSurveyor</span><span class="params">(<span name="lib">lib: <span class="extype" name="edu.holycross.shot.scm.CiteLibrary">CiteLibrary</span></span>, <span name="baseDir">baseDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="releaseId">releaseId: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
+      </span>
+      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">lib</dt><dd class="cmt"><p>The published release to survey.</p></dd><dt class="param">baseDir</dt><dd class="cmt"><p>Directory where subdirectory for reports will be created.</p></dd><dt class="param">releaseId</dt><dd class="cmt"><p>Identifier for this release, used to create name
+of subdirectory where reports are written.</p></dd></dl></div>
+    </li></ol>
+            </div>
 
         
 
@@ -223,7 +244,7 @@ multiple XML source files in a given directory.
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -239,7 +260,7 @@ multiple XML source files in a given directory.
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html###():Int" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -255,7 +276,7 @@ multiple XML source files in a given directory.
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -271,7 +292,7 @@ multiple XML source files in a given directory.
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -284,10 +305,26 @@ multiple XML source files in a given directory.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#baseDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="baseDir:String"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#baseDir:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">baseDir</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#clone():Object" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -308,10 +345,10 @@ multiple XML source files in a given directory.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="org.homermultitext.hmtcexbuilder.ScholiaComposite#composite" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="composite(inputDir:String,outputDir:String,fileNameBase:String):Unit"></a><a id="composite(String,String,String):Unit"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#dirMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="dirMap:Map[String,java.io.File]"></a><a id="dirMap:Map[String,File]"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#composite(inputDir:String,outputDir:String,fileNameBase:String):Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#dirMap:Map[String,java.io.File]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -320,16 +357,14 @@ multiple XML source files in a given directory.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">composite</span><span class="params">(<span name="inputDir">inputDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="outputDir">outputDir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileNameBase">fileNameBase: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;va_composite_scholia&quot;</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">dirMap</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="java.io.File">File</span>]</span>
       </span>
       
-      <p class="shortcomment cmt">Write composite CEX files for set of XML source files.</p><div class="fullcomment"><div class="comment cmt"><p>Write composite CEX files for set of XML source files.
-</p></div><dl class="paramcmts block"><dt class="param">inputDir</dt><dd class="cmt"><p>Name of directory with XML source files.</p></dd><dt class="param">outputDir</dt><dd class="cmt"><p>Name of directory where CEX files should be written.</p></dd><dt class="param">fileNameBase</dt><dd class="cmt"><p>Base for individual file names.  Final file name will
-be this string + &quot;_&quot; + the scholion identifier + &quot;.xml&quot;.</p></dd></dl></div>
-    </li><li name="org.homermultitext.hmtcexbuilder.ScholiaComposite#compositeDocument" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="compositeDocument(document:String,files:Vector[java.io.File]):String"></a><a id="compositeDocument(String,Vector[File]):String"></a>
+      <p class="shortcomment cmt">Construct map of required subdirectories.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#dseOverview" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dseOverview(dseDir:java.io.File,columns:Int,thumbSize:Int):Unit"></a><a id="dseOverview(File,Int,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#compositeDocument(document:String,files:Vector[java.io.File]):String" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#dseOverview(dseDir:java.io.File,columns:Int,thumbSize:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -338,49 +373,15 @@ be this string + &quot;_&quot; + the scholion identifier + &quot;.xml&quot;.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">compositeDocument</span><span class="params">(<span name="document">document: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="files">files: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="java.io.File">File</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">dseOverview</span><span class="params">(<span name="dseDir">dseDir: <span class="extype" name="java.io.File">File</span></span>, <span name="columns">columns: <span class="extype" name="scala.Int">Int</span></span>, <span name="thumbSize">thumbSize: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <p class="shortcomment cmt">Extract a given scholia document from a set of XML
-source files and create a single composite text (as a String).</p><div class="fullcomment"><div class="comment cmt"><p>Extract a given scholia document from a set of XML
-source files and create a single composite text (as a String).
-</p></div><dl class="paramcmts block"><dt class="param">document</dt><dd class="cmt"><p>Document identifier for scholia document (work ID in the document's CTS URN).</p></dd><dt class="param">files</dt><dd class="cmt"><p>XML files to extract content from.</p></dd></dl></div>
-    </li><li name="org.homermultitext.hmtcexbuilder.ScholiaComposite#docClose" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="docClose:String"></a>
-      <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#docClose:String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">docClose</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Closing statement for TEI wrapping elements.</p>
-    </li><li name="org.homermultitext.hmtcexbuilder.ScholiaComposite#docOpen" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="docOpen:String"></a>
-      <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#docOpen:String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">docOpen</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Opening statement for TEI wrapping elements.</p>
+      <p class="shortcomment cmt">Compose report on collections of DSE relations.</p><div class="fullcomment"><div class="comment cmt"><p>Compose report on collections of DSE relations.
+</p></div><dl class="paramcmts block"><dt class="param">dseDir</dt><dd class="cmt"><p>Directory where TBS reports should be written.</p></dd><dt class="param">columns</dt><dd class="cmt"><p>Width of output table in columns.</p></dd><dt class="param">thumbSize</dt><dd class="cmt"><p>Widthof thumbnail images in pixels.</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -393,10 +394,10 @@ source files and create a single composite text (as a String).
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#fileLayoutBoilerPlate" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fileLayoutBoilerPlate:String"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#equals(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#fileLayoutBoilerPlate:String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -405,14 +406,14 @@ source files and create a single composite text (as a String).
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">fileLayoutBoilerPlate</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <p class="shortcomment cmt">Compose message about file layout.</p>
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#finalize():Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -434,7 +435,7 @@ source files and create a single composite text (as a String).
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -450,10 +451,42 @@ source files and create a single composite text (as a String).
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#hmtIctBase" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="hmtIctBase:String"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#hashCode():Int" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#hmtIctBase:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hmtIctBase</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Base URL for references to HMT Image Citation Tool.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#hmtIipSrvBase" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="hmtIipSrvBase:String"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#hmtIipSrvBase:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hmtIipSrvBase</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Base URL to an installation of IIPSrv with HMT data.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#homePage" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="homePage:String"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#homePage:String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -462,17 +495,47 @@ source files and create a single composite text (as a String).
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">homePage</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
-                <span class="name">@native</span><span class="args">()</span>
-              
-        </dd></dl></div>
+      <p class="shortcomment cmt">Compose a home page, in markdown format, for this report.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#iipSrvUrl" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="iipSrvUrl(img:edu.holycross.shot.cite.Cite2Urn,width:Int,baseUrl:String):String"></a><a id="iipSrvUrl(Cite2Urn,Int,String):String"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#iipSrvUrl(img:edu.holycross.shot.cite.Cite2Urn,width:Int,baseUrl:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">iipSrvUrl</span><span class="params">(<span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>, <span name="width">width: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">1000</span></span>, <span name="baseUrl">baseUrl: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#hmtIipSrvBase:String">hmtIipSrvBase</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Compose IIPSrv URL for an image.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#imageOverview" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="imageOverview(imageDir:java.io.File,columns:Int,thumbSize:Int):Unit"></a><a id="imageOverview(File,Int,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#imageOverview(imageDir:java.io.File,columns:Int,thumbSize:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">imageOverview</span><span class="params">(<span name="imageDir">imageDir: <span class="extype" name="java.io.File">File</span></span>, <span name="columns">columns: <span class="extype" name="scala.Int">Int</span></span>, <span name="thumbSize">thumbSize: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Compose report on collections of images modelled as imagemodel objects.</p><div class="fullcomment"><div class="comment cmt"><p>Compose report on collections of images modelled as imagemodel objects.
+</p></div><dl class="paramcmts block"><dt class="param">imageDir</dt><dd class="cmt"><p>Directory where image reports should be written.</p></dd><dt class="param">columns</dt><dd class="cmt"><p>Width of output table in columns.</p></dd><dt class="param">thumbSize</dt><dd class="cmt"><p>Widthof thumbnail images in pixels.</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -485,10 +548,26 @@ source files and create a single composite text (as a String).
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#lib" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="lib:edu.holycross.shot.scm.CiteLibrary"></a><a id="lib:CiteLibrary"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#lib:edu.holycross.shot.scm.CiteLibrary" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">lib</span><span class="result">: <span class="extype" name="edu.holycross.shot.scm.CiteLibrary">CiteLibrary</span></span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -504,7 +583,7 @@ source files and create a single composite text (as a String).
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#notify():Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -523,7 +602,7 @@ source files and create a single composite text (as a String).
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -539,10 +618,10 @@ source files and create a single composite text (as a String).
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="org.homermultitext.hmtcexbuilder.ScholiaComposite#scholiaSet" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="scholiaSet(srcDir:String):Set[String]"></a><a id="scholiaSet(String):Set[String]"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#overview" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overview(columns:Int,thumbSize:Int):Unit"></a><a id="overview(Int,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#scholiaSet(srcDir:String):Set[String]" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#overview(columns:Int,thumbSize:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -551,17 +630,81 @@ source files and create a single composite text (as a String).
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">scholiaSet</span><span class="params">(<span name="srcDir">srcDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">overview</span><span class="params">(<span name="columns">columns: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">6</span></span>, <span name="thumbSize">thumbSize: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">400</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <p class="shortcomment cmt">Find set of text groups represented in XML
-source files in a given directory.</p><div class="fullcomment"><div class="comment cmt"><p>Find set of text groups represented in XML
-source files in a given directory.
-</p></div><dl class="paramcmts block"><dt class="param">srcDir</dt><dd class="cmt"><p>Directory containing XML editions of scholia.</p></dd></dl></div>
+      <p class="shortcomment cmt">Assemble a complete suite of reports for a this release.</p><div class="fullcomment"><div class="comment cmt"><p>Assemble a complete suite of reports for a this release.
+</p></div><dl class="paramcmts block"><dt class="param">columns</dt><dd class="cmt"><p>Width in columns of tables with thumbnail images.</p></dd><dt class="param">thumbSize</dt><dd class="cmt"><p>Width in pixes of thumbnail images.</p></dd></dl></div>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#releaseDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="releaseDir:java.io.File"></a><a id="releaseDir:File"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#releaseDir:java.io.File" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">releaseDir</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Find directory for reports on this release, as a File object,
+ensuring that it has been created.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#releaseId" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="releaseId:String"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#releaseId:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">releaseId</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#rootDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rootDir:java.io.File"></a><a id="rootDir:File"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#rootDir:java.io.File" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rootDir</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Find root directory as a File object,
+ensuring that it has been created.</p>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#subdirForTopic" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="subdirForTopic:scala.collection.immutable.Map[String,String]"></a><a id="subdirForTopic:Map[String,String]"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#subdirForTopic:scala.collection.immutable.Map[String,String]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">subdirForTopic</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Map of topic label to subdirectory name.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -574,10 +717,10 @@ source files in a given directory.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#tbsOverview" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tbsOverview(tbsDir:java.io.File,columns:Int,thumbSize:Int):Unit"></a><a id="tbsOverview(File,Int,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#toString():String" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#tbsOverview(tbsDir:java.io.File,columns:Int,thumbSize:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -586,14 +729,32 @@ source files in a given directory.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">tbsOverview</span><span class="params">(<span name="tbsDir">tbsDir: <span class="extype" name="java.io.File">File</span></span>, <span name="columns">columns: <span class="extype" name="scala.Int">Int</span></span>, <span name="thumbSize">thumbSize: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <p class="shortcomment cmt">Compose report on collections of text-bearing surfaces.</p><div class="fullcomment"><div class="comment cmt"><p>Compose report on collections of text-bearing surfaces.
+</p></div><dl class="paramcmts block"><dt class="param">tbsDir</dt><dd class="cmt"><p>Directory where TBS reports should be written.</p></dd><dt class="param">columns</dt><dd class="cmt"><p>Width of output table in columns.</p></dd><dt class="param">thumbSize</dt><dd class="cmt"><p>Widthof thumbnail images in pixels.</p></dd></dl></div>
+    </li><li name="org.homermultitext.hmtcexbuilder.ReleaseSurveyor#textOverview" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="textOverview(textDir:java.io.File):java.io.PrintWriter"></a><a id="textOverview(File):PrintWriter"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#textOverview(textDir:java.io.File):java.io.PrintWriter" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">textOverview</span><span class="params">(<span name="textDir">textDir: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result">: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Compose report on OHCO2 editions.</p><div class="fullcomment"><div class="comment cmt"><p>Compose report on OHCO2 editions.
+</p></div><dl class="paramcmts block"><dt class="param">textDir</dt><dd class="cmt"><p>Directory where TBS reports should be written.</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#wait():Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -615,7 +776,7 @@ source files in a given directory.
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -637,7 +798,7 @@ source files in a given directory.
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/ScholiaComposite$.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/ReleaseSurveyor.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -668,7 +829,15 @@ source files in a given directory.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

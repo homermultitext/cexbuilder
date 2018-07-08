@@ -119,12 +119,16 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.homermultitext">homermultitext</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="object" href="DataCollector$.html" title=""></a>
-                        <a href="DataCollector$.html" title="">DataCollector</a>
+                        <a class="object" href="DataCollector$.html" title="Utility objectn"></a>
+                        <a href="DataCollector$.html" title="Utility objectn">DataCollector</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="object" href="" title="Factory for creating CEX composite texts of Iliads from multiple XML source files in a given directory."></a>
                         <a href="" title="Factory for creating CEX composite texts of Iliads from multiple XML source files in a given directory.">IliadComposite</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary."></a>
+                        <a href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary.">ReleaseSurveyor</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="object" href="ScholiaComposite$.html" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory."></a>
@@ -323,9 +327,9 @@ from multiple XML source files in a given directory.
 </p></div><dl class="paramcmts block"><dt class="param">inputDir</dt><dd class="cmt"><p>Name of directory with XML source files.</p></dd><dt class="param">outputDir</dt><dd class="cmt"><p>Name of directory where CEX files should be written.</p></dd><dt class="param">fileNameBase</dt><dd class="cmt"><p>Base for individual file names.  Final file name will
 be this string + &quot;_&quot; + the scholion identifier + &quot;.xml&quot;.</p></dd></dl></div>
     </li><li name="org.homermultitext.hmtcexbuilder.IliadComposite#compositeDocument" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="compositeDocument(files:Set[java.io.File]):String"></a><a id="compositeDocument(Set[File]):String"></a>
+      <a id="compositeDocument(files:Vector[java.io.File]):String"></a><a id="compositeDocument(Vector[File]):String"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/IliadComposite$.html#compositeDocument(files:Set[java.io.File]):String" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/IliadComposite$.html#compositeDocument(files:Vector[java.io.File]):String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -334,7 +338,7 @@ be this string + &quot;_&quot; + the scholion identifier + &quot;.xml&quot;.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">compositeDocument</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="java.io.File">File</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">compositeDocument</span><span class="params">(<span name="files">files: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="java.io.File">File</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
       <p class="shortcomment cmt">Extract a given scholia document from a set of XML

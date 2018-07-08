@@ -7,4 +7,4 @@ Utilities to convert material in the HMT archive to CEX format for publication, 
 
 Currently available document:
 
--   [API docs](api/org/homermultitext/hmtcexbuilder)
+-   [API docs](api/org/homermultitext/hmtcexbuilder) for version **3.2.0**

@@ -119,12 +119,16 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="org.homermultitext">homermultitext</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="object" href="" title=""></a>
-                        <a href="" title="">DataCollector</a>
+                        <a class="object" href="" title="Utility objectn"></a>
+                        <a href="" title="Utility objectn">DataCollector</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="object" href="IliadComposite$.html" title="Factory for creating CEX composite texts of Iliads from multiple XML source files in a given directory."></a>
                         <a href="IliadComposite$.html" title="Factory for creating CEX composite texts of Iliads from multiple XML source files in a given directory.">IliadComposite</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary."></a>
+                        <a href="ReleaseSurveyor.html" title="Class for creating overviews of a published release of HMT instantiated as a CiteLibrary.">ReleaseSurveyor</a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
                         <a class="object" href="ScholiaComposite$.html" title="Factory for creating CEX composite texts of scholia from multiple XML source files in a given directory."></a>
@@ -157,7 +161,7 @@
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Utility objectn</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
@@ -357,10 +361,10 @@ descendants of a given node.</p></div><dl class="paramcmts block"><dt class="par
       <p class="shortcomment cmt">Recursively collect contents of all text-node
 descendants of a given node.</p><div class="fullcomment"><div class="comment cmt"><p>Recursively collect contents of all text-node
 descendants of a given node.</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>Node to collect from.</p></dd><dt>returns</dt><dd class="cmt"><p>A single String with all text from n.</p></dd></dl></div>
-    </li><li name="org.homermultitext.hmtcexbuilder.DataCollector#compositeCex" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="compositeCex(dir:String):String"></a><a id="compositeCex(String):String"></a>
+    </li><li name="org.homermultitext.hmtcexbuilder.DataCollector#compositeFiles" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="compositeFiles(dir:String,extension:String,dropLines:Int):String"></a><a id="compositeFiles(String,String,Int):String"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/DataCollector$.html#compositeCex(dir:String):String" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/DataCollector$.html#compositeFiles(dir:String,extension:String,dropLines:Int):String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -369,13 +373,14 @@ descendants of a given node.</p></div><dl class="paramcmts block"><dt class="par
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">compositeCex</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">compositeFiles</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="extension">extension: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;cex&quot;</span></span>, <span name="dropLines">dropLines: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">0</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
       <p class="shortcomment cmt">Create a single String concatenating content
-of all CEX files in a given directory.</p><div class="fullcomment"><div class="comment cmt"><p>Create a single String concatenating content
-of all CEX files in a given directory.
-</p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>Directory to collect content from.</p></dd></dl></div>
+of all CEX files in a given directory having a given file extension.</p><div class="fullcomment"><div class="comment cmt"><p>Create a single String concatenating content
+of all CEX files in a given directory having a given file extension.
+</p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>Directory to collect content from.</p></dd><dt class="param">extension</dt><dd class="cmt"><p>File name extension of files to collect.</p></dd><dt class="param">dropLines</dt><dd class="cmt"><p>Number of lines to drop from beginning of file,
+0 if none should be dropped.</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
@@ -409,9 +414,9 @@ of all CEX files in a given directory.
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="org.homermultitext.hmtcexbuilder.DataCollector#filesInDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="filesInDir(dir:String,extension:String):Set[java.io.File]"></a><a id="filesInDir(String,String):Set[File]"></a>
+      <a id="filesInDir(dir:String,extension:String):Vector[java.io.File]"></a><a id="filesInDir(String,String):Vector[File]"></a>
       <span class="permalink">
-      <a href="../../../org/homermultitext/hmtcexbuilder/DataCollector$.html#filesInDir(dir:String,extension:String):Set[java.io.File]" title="Permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/DataCollector$.html#filesInDir(dir:String,extension:String):Vector[java.io.File]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -420,13 +425,29 @@ of all CEX files in a given directory.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">filesInDir</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="extension">extension: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;xml&quot;</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="java.io.File">File</span>]</span>
+        <span class="name">filesInDir</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="extension">extension: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="java.io.File">File</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Find set of files in a given directory with name
 matching a given extension.</p><div class="fullcomment"><div class="comment cmt"><p>Find set of files in a given directory with name
 matching a given extension.
 </p></div><dl class="paramcmts block"><dt class="param">dir</dt><dd class="cmt"><p>Directory to look in.</p></dd><dt class="param">extension</dt><dd class="cmt"><p>File extension to match.</p></dd></dl></div>
+    </li><li name="org.homermultitext.hmtcexbuilder.DataCollector#filesInDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="filesInDir(dir:java.io.File,extension:String):Vector[java.io.File]"></a><a id="filesInDir(File,String):Vector[File]"></a>
+      <span class="permalink">
+      <a href="../../../org/homermultitext/hmtcexbuilder/DataCollector$.html#filesInDir(dir:java.io.File,extension:String):Vector[java.io.File]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">filesInDir</span><span class="params">(<span name="dir">dir: <span class="extype" name="java.io.File">File</span></span>, <span name="extension">extension: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="java.io.File">File</span>]</span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
