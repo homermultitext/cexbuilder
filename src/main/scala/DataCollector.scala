@@ -59,7 +59,7 @@ object DataCollector {
       throw new Exception("DataCollector: no directory " + dir + " found.")
     } else {
       val fileVector = dir.listFiles.filter(_.isFile).toVector
-      fileVector.filter(_.getName.endsWith(extension))
+      fileVector.filter(_.getName.endsWith(extension)).sorted
     }
   }
 

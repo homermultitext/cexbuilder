@@ -1,5 +1,10 @@
 # Release notes
 
+**3.3.0**:   new functionality in dependent libraries.
+
+**3.2.1**:  ensure that files are collected in alphabetical order.
+
+
 **3.2.0**:  add option to drop header lines when collecting data from typed files.
 
 **3.1.2**:  updates to numerous underyling libraries
