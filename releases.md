@@ -1,5 +1,7 @@
 # Release notes
 
+**3.3.1**:  harmonize dependency on `citereleations` library.
+
 **3.3.0**:   new functionality in dependent libraries.
 
 **3.2.1**:  ensure that files are collected in alphabetical order.
