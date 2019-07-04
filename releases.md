@@ -1,5 +1,7 @@
 # Release notes
 
+**3.4.0**:  numerous updates from updated library dependencies.
+
 **3.3.1**:  harmonize dependency on `citereleations` library.
 
 **3.3.0**:   new functionality in dependent libraries.

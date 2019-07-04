@@ -1,6 +1,6 @@
 package org.homermultitext.hmtcexbuilder
 
-
+import edu.holycross.shot.cex._
 import scala.xml._
 import java.io.File
 import java.io.PrintWriter

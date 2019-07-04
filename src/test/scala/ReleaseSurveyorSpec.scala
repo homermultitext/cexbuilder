@@ -3,7 +3,7 @@ import org.scalatest.FlatSpec
 import scala.xml._
 import java.io.File
 import edu.holycross.shot.cite._
-
+import edu.holycross.shot.cex._
 import edu.holycross.shot.scm._
 
 class ReleaseSurveyorSpec extends FlatSpec {

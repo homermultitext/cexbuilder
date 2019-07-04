@@ -3,7 +3,7 @@ package org.homermultitext.hmtcexbuilder
 import org.scalatest.FlatSpec
 import java.io.File
 import scala.xml._
-
+import edu.holycross.shot.cex._
 class ScholiaCompositeSpec extends FlatSpec {
 
   "The ScholiaComposite object" should "find unique scholia groups in a set of files" in {

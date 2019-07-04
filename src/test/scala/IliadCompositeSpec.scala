@@ -1,5 +1,5 @@
 package org.homermultitext.hmtcexbuilder
-
+import edu.holycross.shot.cex._
 import org.scalatest.FlatSpec
 import java.io.File
 import scala.xml._
