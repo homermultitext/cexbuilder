@@ -5,6 +5,8 @@ import scala.xml._
 import java.io.File
 import java.io.PrintWriter
 
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 
 /** Factory for creating CEX composite texts of Iliads
@@ -12,9 +14,9 @@ import java.io.PrintWriter
 *
 * @param srcDir Source directory with archival XML files.
 */
-object IliadComposite {
+object IliadComposite extends LogSupport {
 
-  /** Extract a given scholia document from a set of XML
+  /** Extract a given Iliad document from a set of XML
   * source files and create a single composite text (as a String).
   *
   * @param document Document identifier for scholia document (work ID in the document's CTS URN).
@@ -28,7 +30,7 @@ object IliadComposite {
       val book = bookNode.attribute("n").get
       val bookOpen = s"""<div n="${book}" type="book">"""
       val lines = bookNode \ "l"
-      println("In book " + book + s", ${lines.size} lines.")
+      info("In book " + book + s", ${lines.size} lines.")
       val iliadStrings = lines.map(_.toString)
       bookOpen + iliadStrings.mkString("\n") + "</div>"
     }

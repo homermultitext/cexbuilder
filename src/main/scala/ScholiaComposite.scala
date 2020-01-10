@@ -7,13 +7,16 @@ import java.io.File
 import java.io.PrintWriter
 
 
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
 
 /** Factory for creating CEX composite texts of scholia from
 * multiple XML source files in a given directory.
 *
 * @param srcDir Source directory with archival XML files..
 */
-object ScholiaComposite {
+object ScholiaComposite extends LogSupport {
 
 
   /** Find set of text groups represented in XML
@@ -51,7 +54,7 @@ object ScholiaComposite {
       if (relevant.size > 0) {
         val doc = relevant(0)
         val scholia = doc \ "body" \ "div"
-        println("\tIn " + document + ", book " + book  +": " + scholia.size + " scholia.")
+        info("\tIn " + document + ", book " + book  +": " + scholia.size + " scholia.")
         val scholStrings = scholia.map(_.toString)
         bookOpen + scholStrings.mkString("\n") + "</div>"
       } else { "" }
